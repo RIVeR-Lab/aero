@@ -86,7 +86,7 @@
     <transmission name="${fb}_${lr}_wheel_tran">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="joint_${fb}_${lr}_wheel"/>
-      <actuator name="${fb}_${lr}_wheel_motor">
+      <actuator name="${lr}_wheel_motor">
 	<hardwareInterface>EffortJointInterface</hardwareInterface>
 	<mechanicalReduction>1</mechanicalReduction>
       </actuator>
