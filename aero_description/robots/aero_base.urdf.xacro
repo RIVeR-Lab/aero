@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="aero">
+       
+  <!-- Included URDF/XACRO Files -->
+  <xacro:include filename="$(find aero_description)/urdf/ros_control.gazebo.xacro" />
+  <xacro:include filename="$(find aero_description)/urdf/husky.urdf.xacro" />
+  <xacro:include filename="$(find aero_description)/urdf/sick_laser.urdf.xacro" />
+  <xacro:include filename="$(find aero_description)/urdf/simple_transform.urdf.xacro" />
+
+  <xacro:husky/>
+
+  <!-- Laser -->
+  <xacro:sick_laser_v0 name="laser" parent="base_link" ros_topic="laser" update_rate="25" >
+    <origin xyz="${base_length/2+0.0635} 0 0.0254" rpy="${M_PI} 0 0" />
+  </xacro:sick_laser_v0>
+
+  <!-- IMU -->
+  <xacro:static_transform parent="base_link" name="imu" xyz="0 0 0" rpy="0 ${-M_PI/2} ${-3*M_PI/4}">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+	<box size="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+	<box size="0.01 0.01 0.01" />
+      </geometry>
+      <material name="Blue" />
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+  </xacro:static_transform>
+  
+</robot>

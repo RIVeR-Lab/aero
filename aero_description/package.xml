@@ -1,0 +1,17 @@
+<package>
+
+  <name>aero_description</name>
+  <version>1.0.0</version>
+  <license></license>
+  <description>
+     aero_description
+  </description>
+  <maintainer email="mwills@wpi.edu">Mitchell Wills</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>xacro</run_depend>
+
+</package>
+
+
