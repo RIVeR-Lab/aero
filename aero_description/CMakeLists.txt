@@ -8,7 +8,7 @@ find_package(catkin REQUIRED)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(CATKIN_DEPENDS xacro)
 
-foreach(dir meshes urdf robots)
+foreach(dir meshes urdf robots launch)
    install(DIRECTORY ${dir}/ 
       DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
 endforeach(dir)

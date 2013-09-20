@@ -13,7 +13,7 @@ catkin_package(
     LIBRARIES
 )
 
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
-
+foreach(dir worlds launch)
+   install(DIRECTORY ${dir}/ 
+      DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/${dir})
+endforeach(dir)
