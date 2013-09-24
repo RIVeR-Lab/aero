@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find aero_gazebo)/launch/aero_base_world.launch">
+  </include>
+  <include file="$(find aero_control)/launch/aero_control.launch">
+  </include>
+</launch>
