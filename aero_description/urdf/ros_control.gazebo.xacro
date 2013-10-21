@@ -3,6 +3,7 @@
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/aero</robotNamespace>
+      <robotSimType>aero_gazebo/AeroHWSim</robotSimType>
     </plugin>
   </gazebo>
 </root>

@@ -4,12 +4,8 @@ aero:
     type: joint_state_controller/JointStateController
     publish_rate: 50  
   
-  # Position Controllers ---------------------------------------
-  left_wheel_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: joint_front_left_wheel
-    pid: {p: 100.0, i: 0.01, d: 10.0}
-  right_wheel_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: joint_front_right_wheel
-    pid: {p: 100.0, i: 0.01, d: 10.0}
+  # Drive Controller
+  drive_controller:
+    type: robot_drive_controllers/Skid4WheelDriveController
+    left_joint_name: left_wheels_motor
+    right_joint_name: right_wheels_motor
