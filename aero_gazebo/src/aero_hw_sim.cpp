@@ -86,7 +86,7 @@ public:
 
   void writeSim(ros::Time time, ros::Duration period)
   {
-    double torque_ = 15.0;
+    double torque_ = 100.0;
     front_left_joint_->SetVelocity(0, left_velocity_command_);
     front_left_joint_->SetMaxForce( 0, torque_ );
     back_left_joint_->SetVelocity(0, left_velocity_command_);
