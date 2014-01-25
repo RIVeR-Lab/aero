@@ -35,7 +35,7 @@ private:
   double right_velocity_;
   double right_effort_;
 
-  hardware_interface::JointStateInterface    js_interface_;
+  hardware_interface::JointStateInterface js_interface_;
   hardware_interface::VelocityJointInterface vj_interface_;
 
   gazebo::physics::JointPtr front_left_joint_;
@@ -44,26 +44,22 @@ private:
   gazebo::physics::JointPtr back_right_joint_;
 
 public:
-  bool initSim(
-    const std::string& robot_namespace,
-    ros::NodeHandle model_nh,
-    gazebo::physics::ModelPtr parent_model,
-    const urdf::Model* const urdf_model,
-    std::vector<transmission_interface::TransmissionInfo> transmissions)
+  bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
+               const urdf::Model* const urdf_model, std::vector<transmission_interface::TransmissionInfo> transmissions)
   {
     front_left_joint_ = parent_model->GetJoint("joint_front_left_wheel");
     back_left_joint_ = parent_model->GetJoint("joint_back_left_wheel");
     front_right_joint_ = parent_model->GetJoint("joint_front_right_wheel");
     back_right_joint_ = parent_model->GetJoint("joint_back_right_wheel");
 
-    js_interface_.registerHandle(hardware_interface::JointStateHandle(
-          "left_wheels_motor", &left_position_, &left_velocity_, &left_effort_));
-    js_interface_.registerHandle(hardware_interface::JointStateHandle(
-          "right_wheels_motor", &right_position_, &right_velocity_, &right_effort_));
-    vj_interface_.registerHandle(hardware_interface::JointHandle(
-	 js_interface_.getHandle("left_wheels_motor"), &left_velocity_command_));
-    vj_interface_.registerHandle(hardware_interface::JointHandle(
-	 js_interface_.getHandle("right_wheels_motor"), &right_velocity_command_));
+    js_interface_.registerHandle(
+        hardware_interface::JointStateHandle("left_wheels_motor", &left_position_, &left_velocity_, &left_effort_));
+    js_interface_.registerHandle(
+        hardware_interface::JointStateHandle("right_wheels_motor", &right_position_, &right_velocity_, &right_effort_));
+    vj_interface_.registerHandle(
+        hardware_interface::JointHandle(js_interface_.getHandle("left_wheels_motor"), &left_velocity_command_));
+    vj_interface_.registerHandle(
+        hardware_interface::JointHandle(js_interface_.getHandle("right_wheels_motor"), &right_velocity_command_));
 
     // Register interfaces
     registerInterface(&js_interface_);
@@ -75,13 +71,11 @@ public:
   void readSim(ros::Time time, ros::Duration period)
   {
     //only read data from the front wheel joints
-    left_position_ += angles::shortest_angular_distance(left_position_,
-	front_left_joint_->GetAngle(0).Radian());
+    left_position_ += angles::shortest_angular_distance(left_position_, front_left_joint_->GetAngle(0).Radian());
     left_velocity_ = front_left_joint_->GetVelocity(0);
     left_effort_ = front_left_joint_->GetForce((unsigned int)(0));
 
-    right_position_ += angles::shortest_angular_distance(right_position_,
-	 front_right_joint_->GetAngle(0).Radian());
+    right_position_ += angles::shortest_angular_distance(right_position_, front_right_joint_->GetAngle(0).Radian());
     right_velocity_ = front_right_joint_->GetVelocity(0);
     right_effort_ = front_right_joint_->GetForce((unsigned int)(0));
   }
@@ -90,13 +84,13 @@ public:
   {
     double torque_ = 100.0;
     front_left_joint_->SetVelocity(0, left_velocity_command_);
-    front_left_joint_->SetMaxForce( 0, torque_ );
+    front_left_joint_->SetMaxForce(0, torque_);
     back_left_joint_->SetVelocity(0, left_velocity_command_);
-    back_left_joint_->SetMaxForce( 0, torque_ );
+    back_left_joint_->SetMaxForce(0, torque_);
     front_right_joint_->SetVelocity(0, right_velocity_command_);
-    front_right_joint_->SetMaxForce( 0, torque_ );
+    front_right_joint_->SetMaxForce(0, torque_);
     back_right_joint_->SetVelocity(0, right_velocity_command_);
-    back_right_joint_->SetMaxForce( 0, torque_ );
+    back_right_joint_->SetMaxForce(0, torque_);
 
   }
 
@@ -107,6 +101,4 @@ typedef boost::shared_ptr<AeroHWSim> AeroHWSimPtr;
 }
 
 // \todo PLUGINLIB_DECLARE_CLASS has been deprecated. Replace it with PLUGINLIB_EXPORT_CLASS.
-PLUGINLIB_EXPORT_CLASS(
-  aero_gazebo::AeroHWSim,
-  gazebo_ros_control::RobotHWSim)
+PLUGINLIB_EXPORT_CLASS(aero_gazebo::AeroHWSim, gazebo_ros_control::RobotHWSim)
