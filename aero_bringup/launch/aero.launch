@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find aero_control)/launch/aero_control.launch">
+  </include>
+  <include file="$(find aero_bringup)/launch/aero_diagnostics.launch">
+  </include>
+</launch>

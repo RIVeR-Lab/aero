@@ -1,0 +1,31 @@
+<launch>
+  <arg name="temperature_topic" default="temperature" />
+  
+  <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
+    <rosparam command="load" file="$(find aero_bringup)/config/diagnostics.yaml" />
+  </node>
+
+  <node name="computer_sensors_monitor" pkg="ros_lm_sensors" type="sensor_monitor">
+    <param name="temperature_topic" value="$(arg temperature_topic)" />
+    <param name="diagnostic_period" value="2" />
+    <param name="computer_frame" value="Computer" />
+  </node>
+
+  <node pkg="manzanita_mk3_driver" type="mk3_driver" name="mk3_battery_monitor">
+    <param name="port" value="/dev/BMS" />
+
+    <param name="update_rate" value="0.25" />
+
+    <param name="num_parallel_units" value="2" />
+    <param name="num_series_units" value="1" />
+    <param name="cells_per_unit" value="8" />
+    <param name="max_cell_voltage" value="3.5" />
+    <param name="max_total_voltage" value="28" />
+    <param name="warn_total_voltage" value="25.6" />
+    <param name="critical_total_voltage" value="24" />
+
+    <param name="frame_id" value="/battery" />
+    <param name="battery_topic" value="battery" />
+    <param name="temperature_topic" value="$(arg temperature_topic)" />
+  </node>
+</launch>

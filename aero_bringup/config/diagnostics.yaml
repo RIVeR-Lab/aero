@@ -1,0 +1,11 @@
+pub_rate: 1.0
+base_path: ''
+analyzers:
+  Compuer:
+    type: GenericAnalyzer
+    path: Computer
+    find_and_remove_prefix: 'computer_sensors_monitor: '
+  Battery:
+    type: GenericAnalyzer
+    path: Battery
+    find_and_remove_prefix: 'mk3_battery_monitor: '
