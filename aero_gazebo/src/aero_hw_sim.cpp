@@ -53,13 +53,18 @@ public:
     back_right_joint_ = parent_model->GetJoint("joint_back_right_wheel");
 
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("left_wheels_motor", &left_position_, &left_velocity_, &left_effort_));
+        hardware_interface::JointStateHandle("front_left_wheel", &left_position_, &left_velocity_, &left_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("right_wheels_motor", &right_position_, &right_velocity_, &right_effort_));
+        hardware_interface::JointStateHandle("front_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+    js_interface_.registerHandle(
+        hardware_interface::JointStateHandle("back_left_wheel", &left_position_, &left_velocity_, &left_effort_));
+    js_interface_.registerHandle(
+        hardware_interface::JointStateHandle("back_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle("left_wheels_motor"), &left_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle("front_left_wheel"), &left_velocity_command_));
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle("right_wheels_motor"), &right_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle("front_right_wheel"), &right_velocity_command_));
 
     // Register interfaces
     registerInterface(&js_interface_);

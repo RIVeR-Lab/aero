@@ -7,5 +7,5 @@ aero:
   # Drive Controller
   drive_controller:
     type: robot_drive_controllers/Skid4WheelDriveController
-    left_joint_name: left_wheels_motor
-    right_joint_name: right_wheels_motor
+    left_joint_name: front_left_wheel
+    right_joint_name: front_right_wheel
