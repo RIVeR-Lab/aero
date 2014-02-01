@@ -53,18 +53,18 @@ public:
     back_right_joint_ = parent_model->GetJoint("joint_back_right_wheel");
 
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("front_left_wheel", &left_position_, &left_velocity_, &left_effort_));
+        hardware_interface::JointStateHandle("joint_front_left_wheel", &left_position_, &left_velocity_, &left_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("front_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+        hardware_interface::JointStateHandle("joint_front_right_wheel", &right_position_, &right_velocity_, &right_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("back_left_wheel", &left_position_, &left_velocity_, &left_effort_));
+        hardware_interface::JointStateHandle("joint_back_left_wheel", &left_position_, &left_velocity_, &left_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("back_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+        hardware_interface::JointStateHandle("joint_back_right_wheel", &right_position_, &right_velocity_, &right_effort_));
 
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle("front_left_wheel"), &left_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle("joint_front_left_wheel"), &left_velocity_command_));
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle("front_right_wheel"), &right_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle("joint_front_right_wheel"), &right_velocity_command_));
 
     // Register interfaces
     registerInterface(&js_interface_);
@@ -105,5 +105,4 @@ typedef boost::shared_ptr<AeroHWSim> AeroHWSimPtr;
 
 }
 
-// \todo PLUGINLIB_DECLARE_CLASS has been deprecated. Replace it with PLUGINLIB_EXPORT_CLASS.
 PLUGINLIB_EXPORT_CLASS(aero_gazebo::AeroHWSim, gazebo_ros_control::RobotHWSim)

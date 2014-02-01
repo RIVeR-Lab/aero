@@ -134,18 +134,4 @@
         <material>Gazebo/FlatBlack</material>
     </gazebo>
 
-    <!--<gazebo>
-	    <plugin name="husky_diff_controller" filename="libhusky_gazebo_plugins.so">
-		    <alwaysOn>true</alwaysOn>
-            <updateRate>100.0</updateRate>
-            <backLeftJoint>joint_back_left_wheel</backLeftJoint>
-            <backRightJoint>joint_back_right_wheel</backRightJoint>
-            <frontLeftJoint>joint_front_left_wheel</frontLeftJoint>
-            <frontRightJoint>joint_front_right_wheel</frontRightJoint>
-            <wheelSeparation>${base_y_size}</wheelSeparation>
-            <wheelDiameter>${wheel_x_size}</wheelDiameter>
-            <torque>35</torque>	
-        </plugin>
-    </gazebo>-->
-        
 </robot>
