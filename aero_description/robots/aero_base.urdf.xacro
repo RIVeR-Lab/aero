@@ -10,9 +10,9 @@
   <xacro:husky/>
 
   <!-- Laser -->
-  <!--<xacro:sick_laser_v0 name="laser" parent="base_link" ros_topic="laser" update_rate="25" >
-    <origin xyz="${base_length/2+0.0635} 0 0.0254" rpy="${M_PI} 0 0" />
-  </xacro:sick_laser_v0>-->
+  <xacro:sick_laser_v0 name="laser" parent="base_link" ros_topic="laser" update_rate="25" >
+    <origin xyz="${base_x_size/2+0.0635} 0 0.0254" rpy="${M_PI} 0 0" />
+  </xacro:sick_laser_v0>
 
   <!-- IMU -->
   <xacro:static_transform parent="base_link" name="imu" xyz="0 0 0" rpy="0 ${-M_PI/2} ${-3*M_PI/4}">

@@ -22,7 +22,7 @@
     <property name="base_z_size" value="0.24750000" />
 
     <!--Weight of the base-->
-    <property name="base_mass" value="33.45489000" /> <!-- in kg-->
+    <property name="base_mass" value="70.45489000" /> <!-- in kg-->
 
     <!--Inertial values for the base at center of mass, aligned with coordinate system. Units are kg*m^2-->
     <property name="base_ixx_com_cs" value="0.60216370" />
