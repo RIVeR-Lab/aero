@@ -13,6 +13,9 @@
   <run_depend>aero_control</run_depend>
   <run_depend>aero_gazebo</run_depend>
   <run_depend>ros_lm_sensors</run_depend>
+  <run_depend>diagnostic_aggregator</run_depend>
+  <run_depend>mk3_driver</run_depend>
+  <run_depend>robot_teleop</run_depend>
 
 
   <export>

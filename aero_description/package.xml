@@ -11,6 +11,7 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <run_depend>xacro</run_depend>
+  <run_depend>husky_description</run_depend>
 
 </package>
 

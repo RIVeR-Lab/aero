@@ -4,9 +4,7 @@ project(aero_description)
 find_package(catkin REQUIRED)
 
 
-## CATKIN_DEPENDS: catkin_packages dependent projects also need
-## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(CATKIN_DEPENDS xacro)
+catkin_package(CATKIN_DEPENDS xacro husky_description)
 
 foreach(dir meshes urdf robots launch)
    install(DIRECTORY ${dir}/ 
