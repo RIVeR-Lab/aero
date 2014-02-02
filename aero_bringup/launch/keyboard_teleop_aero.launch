@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="robot_teleop" type="keyboard_twist_teleop" name="$(anon keyboard_teleop)" output="screen">
+  <remap from="cmd_vel" to="/aero/drive_controller/command"/>
+  </node>
+</launch>
