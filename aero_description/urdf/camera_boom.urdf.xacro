@@ -4,9 +4,9 @@
   <property name="boom_length" value="1.085" />
   <property name="boom_diameter" value="0.0538" />
 
-  <xacro:macro name="aero_camera_boom" params="boom_base">
+  <xacro:macro name="aero_camera_boom" params="boom_base robot_ns">
     <!-- Boom -->
-    <xacro:revolute_pan_transform parent="${boom_base}" name="boom" xyz="0 0 0" rpy="0 0 0" lower_limit="-2" upper_limit="2">
+    <xacro:revolute_pan_transform parent="${boom_base}" name="${robot_ns}/boom" xyz="0 0 0" rpy="0 0 0" lower_limit="-2" upper_limit="2">
       <visual>
 	<origin xyz="0.0 0.0 ${boom_length/2}" rpy="0 0 0" />
 	<geometry>
@@ -29,7 +29,7 @@
 	    izz="1.0"/>
       </inertial>
     </xacro:revolute_pan_transform>
-    <xacro:static_transform parent="boom" name="boom_top" xyz="0 0 ${boom_length}" rpy="0 0 0">
+    <xacro:static_transform parent="${robot_ns}/boom" name="${robot_ns}/boom_top" xyz="0 0 ${boom_length}" rpy="0 0 0">
       <visual>
 	<origin xyz="0 0 0" rpy="0 0 0" />
 	<geometry>
@@ -52,7 +52,7 @@
       </inertial>
     </xacro:static_transform>
     <!-- Cameras -->
-    <xacro:stereo_camera_pair parent="boom_top" prefix="upper_stereo" xyz="0 0 0.005" rpy="0 0 0" camera_base_length="0.3" camera_tilt="${12*M_PI/180}"/>
-    <xacro:stereo_camera_pair parent="boom_top" prefix="lower_stereo" xyz="0 0 -0.127" rpy="0 0 0" camera_base_length="0.11" camera_tilt="${34*M_PI/180}"/>
+    <xacro:stereo_camera_pair parent="${robot_ns}/boom_top" prefix="${robot_ns}/upper_stereo" xyz="0 0 0.005" rpy="0 0 0" camera_base_length="0.3" camera_tilt="${12*M_PI/180}"/>
+    <xacro:stereo_camera_pair parent="${robot_ns}/boom_top" prefix="${robot_ns}/lower_stereo" xyz="0 0 -0.127" rpy="0 0 0" camera_base_length="0.11" camera_tilt="${34*M_PI/180}"/>
   </xacro:macro>
 </robot>

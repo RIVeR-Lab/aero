@@ -35,13 +35,21 @@ private:
   double right_velocity_;
   double right_effort_;
 
-  hardware_interface::JointStateInterface js_interface_;
-  hardware_interface::VelocityJointInterface vj_interface_;
-
   gazebo::physics::JointPtr front_left_joint_;
   gazebo::physics::JointPtr back_left_joint_;
   gazebo::physics::JointPtr front_right_joint_;
   gazebo::physics::JointPtr back_right_joint_;
+
+
+
+  double boom_position_;
+  double boom_velocity_;
+  double boom_effort_;
+  gazebo::physics::JointPtr boom_joint_;
+
+
+  hardware_interface::JointStateInterface js_interface_;
+  hardware_interface::VelocityJointInterface vj_interface_;
 
 public:
   bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
@@ -66,6 +74,13 @@ public:
     vj_interface_.registerHandle(
         hardware_interface::JointHandle(js_interface_.getHandle("joint_front_right_wheel"), &right_velocity_command_));
 
+
+
+    boom_joint_ = parent_model->GetJoint(robot_namespace+"/boom_joint");
+    js_interface_.registerHandle(
+        hardware_interface::JointStateHandle(robot_namespace+"/boom_joint", &boom_position_, &boom_velocity_, &boom_effort_));
+
+
     // Register interfaces
     registerInterface(&js_interface_);
     registerInterface(&vj_interface_);
@@ -83,6 +98,10 @@ public:
     right_position_ += angles::shortest_angular_distance(right_position_, front_right_joint_->GetAngle(0).Radian());
     right_velocity_ = front_right_joint_->GetVelocity(0);
     right_effort_ = front_right_joint_->GetForce((unsigned int)(0));
+
+    boom_position_ += angles::shortest_angular_distance(boom_position_, boom_joint_->GetAngle(0).Radian());
+    boom_velocity_ = boom_joint_->GetVelocity(0);
+    boom_effort_ = boom_joint_->GetForce((unsigned int)(0));
   }
 
   void writeSim(ros::Time time, ros::Duration period)
