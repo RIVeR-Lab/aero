@@ -1,0 +1,58 @@
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="aero_camera_boom">
+  <xacro:include filename="$(find aero_description)/urdf/stereo_camera_pair.urdf.xacro" />
+
+  <property name="boom_length" value="1.085" />
+  <property name="boom_diameter" value="0.0538" />
+
+  <xacro:macro name="aero_camera_boom" params="boom_base">
+    <!-- Boom -->
+    <xacro:revolute_pan_transform parent="${boom_base}" name="boom" xyz="0 0 0" rpy="0 0 0" lower_limit="-2" upper_limit="2">
+      <visual>
+	<origin xyz="0.0 0.0 ${boom_length/2}" rpy="0 0 0" />
+	<geometry>
+	  <cylinder length="${boom_length}" radius="${boom_diameter/2}" />
+	</geometry>
+	<material name="Black" />
+      </visual>
+      <collision>
+	<origin xyz="0.0 0.0 ${boom_length/2}" rpy="0 0 0" />
+	<geometry>
+	  <cylinder length="${boom_length}" radius="${boom_diameter/2}" />
+	</geometry>
+      </collision>
+      <inertial>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+	<mass value="1"/>
+	<inertia
+	    ixx="1.0" ixy="0.0" ixz="0.0"
+	    iyy="1.0" iyz="0.0"
+	    izz="1.0"/>
+      </inertial>
+    </xacro:revolute_pan_transform>
+    <xacro:static_transform parent="boom" name="boom_top" xyz="0 0 ${boom_length}" rpy="0 0 0">
+      <visual>
+	<origin xyz="0 0 0" rpy="0 0 0" />
+	<geometry>
+	  <box size="0.00 0.00 0.00" />
+	</geometry>
+      </visual>
+      <collision>
+	<origin xyz="0 0 0" rpy="0 0 0" />
+	<geometry>
+	  <box size="0.00 0.00 0.00" />
+	</geometry>
+      </collision>
+      <inertial>
+	<origin xyz="0 0 0" rpy="0 0 0"/>
+	<mass value="1"/>
+	<inertia
+	    ixx="1.0" ixy="0.0" ixz="0.0"
+	    iyy="1.0" iyz="0.0"
+	    izz="1.0"/>
+      </inertial>
+    </xacro:static_transform>
+    <!-- Cameras -->
+    <xacro:stereo_camera_pair parent="boom_top" prefix="upper_stereo" xyz="0 0 0.005" rpy="0 0 0" camera_base_length="0.3" camera_tilt="${12*M_PI/180}"/>
+    <xacro:stereo_camera_pair parent="boom_top" prefix="lower_stereo" xyz="0 0 -0.127" rpy="0 0 0" camera_base_length="0.11" camera_tilt="${34*M_PI/180}"/>
+  </xacro:macro>
+</robot>

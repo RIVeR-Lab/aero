@@ -6,6 +6,7 @@
   <xacro:include filename="$(find aero_description)/urdf/base.urdf.xacro" />
   <xacro:include filename="$(find aero_description)/urdf/sick_laser.urdf.xacro" />
   <xacro:include filename="$(find aero_description)/urdf/simple_transform.urdf.xacro" />
+  <xacro:include filename="$(find aero_description)/urdf/camera_boom.urdf.xacro" />
 
   <xacro:husky/>
 
@@ -13,6 +14,33 @@
   <xacro:sick_laser_v0 name="laser" parent="base_link" ros_topic="aero/laser" update_rate="25" >
     <origin xyz="${base_x_size/2+0.0635} 0 0.0254" rpy="${M_PI} 0 0" />
   </xacro:sick_laser_v0>
+
+
+  <!-- Camera Boom -->
+  <xacro:aero_camera_boom boom_base="aero_boom_base"/>
+  <xacro:static_transform parent="base_footprint" name="aero_boom_base" xyz="-0.4191 0 0.28575" rpy="0 0 0">
+    <visual>
+      <origin xyz="0 0 -0.02" rpy="0 0 0" />
+      <geometry>
+	<box size="0.05 0.05 0.05" />
+      </geometry>
+      <material name="Blue" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.02" rpy="0 0 0" />
+      <geometry>
+	<box size="0.05 0.05 0.05" />
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+  </xacro:static_transform>
 
   <!-- IMU -->
   <xacro:static_transform parent="base_link" name="imu" xyz="0 0 0" rpy="0 ${-M_PI/2} ${-3*M_PI/4}">

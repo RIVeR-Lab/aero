@@ -56,7 +56,7 @@
     </link>
 
     <!-- extensions -->
-    <xacro:manta_cam_gazebo_v0 camera_name="${camera_name}" frame_name="${frame_name}" />
+    <!--<xacro:manta_cam_gazebo_v0 camera_name="${camera_name}" frame_name="${frame_name}" />-->
   </xacro:macro>
 
 </root>
