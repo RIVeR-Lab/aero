@@ -24,6 +24,9 @@ namespace aero_gazebo
 class AeroHWSim : public gazebo_ros_control::RobotHWSim
 {
 private:
+  static const double max_drive_joint_torque_ = 100.0;
+  
+
   double left_velocity_command_;
   double right_velocity_command_;
 
@@ -111,15 +114,14 @@ public:
 
   void writeSim(ros::Time time, ros::Duration period)
   {
-    double torque_ = 100.0;
     front_left_joint_->SetVelocity(0, left_velocity_command_);
-    front_left_joint_->SetMaxForce(0, torque_);
+    front_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
     back_left_joint_->SetVelocity(0, left_velocity_command_);
-    back_left_joint_->SetMaxForce(0, torque_);
+    back_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
     front_right_joint_->SetVelocity(0, right_velocity_command_);
-    front_right_joint_->SetMaxForce(0, torque_);
+    front_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
     back_right_joint_->SetVelocity(0, right_velocity_command_);
-    back_right_joint_->SetMaxForce(0, torque_);
+    back_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
 
     boom_joint_->SetAngle(0, boom_position_command_);
   }
