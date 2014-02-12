@@ -1,4 +1,4 @@
 <launch>
   <include file="$(find aero_gazebo)/launch/aero_base_world.launch"/>
-  <include file="$(find aero_control)/launch/aero_control.launch"/>
+  <include file="$(find aero_bringup)/launch/aero_common.launch"/>
 </launch>
