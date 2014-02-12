@@ -114,6 +114,7 @@ data. -->
       <robotNamespace>${robot_ns}</robotNamespace>
       <topicName>imu</topicName>
       <serviceName>imu/calibrate</serviceName>
+      <gaussianNoise>0.0</gaussianNoise><!--TODO determine what this parameter is -->
     </plugin>
   </gazebo>
   

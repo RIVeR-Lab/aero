@@ -9,3 +9,6 @@ aero:
     type: robot_drive_controllers/Skid4WheelDriveController
     left_joint_name: joint_front_left_wheel
     right_joint_name: joint_front_right_wheel
+    rotations_per_meter: 1.0
+    base_width: 0.554
+    base_length: 0.52
