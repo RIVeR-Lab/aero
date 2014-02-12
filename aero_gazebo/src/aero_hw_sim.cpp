@@ -55,10 +55,10 @@ public:
   bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
                const urdf::Model* const urdf_model, std::vector<transmission_interface::TransmissionInfo> transmissions)
   {
-    front_left_joint_ = parent_model->GetJoint("joint_front_left_wheel");
-    back_left_joint_ = parent_model->GetJoint("joint_back_left_wheel");
-    front_right_joint_ = parent_model->GetJoint("joint_front_right_wheel");
-    back_right_joint_ = parent_model->GetJoint("joint_back_right_wheel");
+    front_left_joint_ = parent_model->GetJoint(robot_namespace+"/joint_front_left_wheel");
+    back_left_joint_ = parent_model->GetJoint(robot_namespace+"/joint_back_left_wheel");
+    front_right_joint_ = parent_model->GetJoint(robot_namespace+"/joint_front_right_wheel");
+    back_right_joint_ = parent_model->GetJoint(robot_namespace+"/joint_back_right_wheel");
 
     js_interface_.registerHandle(
         hardware_interface::JointStateHandle("joint_front_left_wheel", &left_position_, &left_velocity_, &left_effort_));

@@ -10,17 +10,17 @@
 
   <property name="robot_ns" value="/aero" />
 
-  <xacro:husky/>
+  <xacro:husky robot_ns="${robot_ns}"/>
 
   <!-- Laser -->
-  <xacro:sick_laser_v0 name="laser" parent="base_link" ros_topic="${robot_ns}/laser" update_rate="25" >
+  <xacro:sick_laser_v0 name="${robot_ns}/laser" parent="${robot_ns}/base_link" ros_topic="${robot_ns}/laser" update_rate="25" >
     <origin xyz="${base_x_size/2+0.0635} 0 0.0254" rpy="${M_PI} 0 0" />
   </xacro:sick_laser_v0>
 
 
   <!-- Camera Boom -->
   <xacro:aero_camera_boom boom_base="${robot_ns}/boom_base" robot_ns="${robot_ns}"/>
-  <xacro:static_transform parent="base_footprint" name="${robot_ns}/boom_base" xyz="-0.4191 0 0.28575" rpy="0 0 0">
+  <xacro:static_transform parent="${robot_ns}/base_footprint" name="${robot_ns}/boom_base" xyz="-0.4191 0 0.28575" rpy="0 0 0">
     <visual>
       <origin xyz="0 0 -0.02" rpy="0 0 0" />
       <geometry>
@@ -45,7 +45,7 @@
   </xacro:static_transform>
 
   <!-- IMU -->
-  <xacro:static_transform parent="base_link" name="imu" xyz="0 0 0" rpy="0 ${-M_PI/2} ${-3*M_PI/4}">
+  <xacro:static_transform parent="${robot_ns}/base_link" name="${robot_ns}/imu" xyz="0 0 0" rpy="0 ${-M_PI/2} ${-3*M_PI/4}">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -68,5 +68,53 @@
 	  izz="1.0"/>
     </inertial>
   </xacro:static_transform>
+  <gazebo reference="${robot_ns}/imu">
+    <sensor name="imu_sensor" type="imu"><!--from atlas-->
+      <always_on>1</always_on>
+      <update_rate>1000.0</update_rate>
+      <imu>
+	<noise>
+	  <type>gaussian</type>
+	  <!-- Noise parameters from Boston Dynamics
+	       (http://gazebosim.org/wiki/Sensor_noise):
+	       rates (rad/s): mean=0, stddev=2e-4
+	       accels (m/s/s): mean=0, stddev=1.7e-2
+	       rate bias (rad/s): 5e-6 - 1e-5
+	       accel bias (m/s/s): 1e-1
+	       Experimentally, simulation provide rates with noise of
+	       about 1e-3 rad/s and accels with noise of about 1e-1 m/s/s.
+	       So we don't expect to see the noise unless number of inner iterations
+	       are increased.
+
+We will add bias.  In this model, bias is sampled once for rates
+and once for accels at startup; the sign (negative or positive)
+of each bias is then switched with equal probability.  Thereafter,
+the biases are fixed additive offsets.  We choose
+bias means and stddevs to produce biases close to the provided
+data. -->
+	  <rate>
+	    <mean>0.0</mean>
+	    <stddev>2e-4</stddev>
+	    <bias_mean>0.0000075</bias_mean>
+	    <bias_stddev>0.0000008</bias_stddev>
+	  </rate>
+	  <accel>
+	    <mean>0.0</mean>
+	    <stddev>1.7e-2</stddev>
+	    <bias_mean>0.1</bias_mean>
+	    <bias_stddev>0.001</bias_stddev>
+	  </accel>
+	</noise>
+      </imu>
+    </sensor>
+  </gazebo>
+  <gazebo><!-- need to put it in it's own gazebo tag with no reference because the imu plugin is a model plugin -->
+    <plugin filename="libgazebo_ros_imu.so" name="imu_controller">
+      <bodyName>${robot_ns}/imu</bodyName>
+      <robotNamespace>${robot_ns}</robotNamespace>
+      <topicName>imu</topicName>
+      <serviceName>imu/calibrate</serviceName>
+    </plugin>
+  </gazebo>
   
 </robot>
