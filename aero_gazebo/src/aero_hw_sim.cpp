@@ -42,6 +42,7 @@ private:
 
 
 
+  double boom_position_command_;
   double boom_position_;
   double boom_velocity_;
   double boom_effort_;
@@ -50,6 +51,7 @@ private:
 
   hardware_interface::JointStateInterface js_interface_;
   hardware_interface::VelocityJointInterface vj_interface_;
+  hardware_interface::PositionJointInterface pj_interface_;
 
 public:
   bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
@@ -79,11 +81,14 @@ public:
     boom_joint_ = parent_model->GetJoint(robot_namespace+"/boom_joint");
     js_interface_.registerHandle(
         hardware_interface::JointStateHandle(robot_namespace+"/boom_joint", &boom_position_, &boom_velocity_, &boom_effort_));
+    pj_interface_.registerHandle(
+        hardware_interface::JointHandle(js_interface_.getHandle(robot_namespace+"/boom_joint"), &boom_position_command_));
 
 
     // Register interfaces
     registerInterface(&js_interface_);
     registerInterface(&vj_interface_);
+    registerInterface(&pj_interface_);
 
     return true;
   }
@@ -116,6 +121,7 @@ public:
     back_right_joint_->SetVelocity(0, right_velocity_command_);
     back_right_joint_->SetMaxForce(0, torque_);
 
+    boom_joint_->SetAngle(0, boom_position_command_);
   }
 
 };

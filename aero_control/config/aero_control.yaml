@@ -12,3 +12,8 @@ aero:
     rotations_per_meter: 1.0
     base_width: 0.554
     base_length: 0.52
+
+  # Boom Position Controller
+  boom_controller:
+    type: position_controllers/JointPositionController
+    joint: /aero/boom_joint
