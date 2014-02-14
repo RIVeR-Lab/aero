@@ -3,7 +3,8 @@
   
   <node pkg="robot_pose_ekf" type="robot_pose_ekf" ns="/aero" name="base_pose_ekf">
     <param name="publish_tf"   value="true"/>
-    <param name="output_frame"   value="/aero/odom"/>
+    <param name="output_frame"   value="odom_combined"/><!-- resolved to tf_prefix -->
+    <param name="tf_prefix"   value="/aero"/>
     <param name="freq"           value="100.0"/>
     <param name="sensor_timeout" value=".1"/>
 

@@ -24,7 +24,7 @@ namespace aero_gazebo
 class AeroHWSim : public gazebo_ros_control::RobotHWSim
 {
 private:
-  static const double max_drive_joint_torque_ = 100.0;
+  static const double max_drive_joint_torque_ = 20.0;
   
 
   double left_velocity_command_;
@@ -66,18 +66,18 @@ public:
     back_right_joint_ = parent_model->GetJoint(robot_namespace+"/joint_back_right_wheel");
 
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("joint_front_left_wheel", &left_position_, &left_velocity_, &left_effort_));
+        hardware_interface::JointStateHandle(robot_namespace+"/joint_front_left_wheel", &left_position_, &left_velocity_, &left_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("joint_front_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+        hardware_interface::JointStateHandle(robot_namespace+"/joint_front_right_wheel", &right_position_, &right_velocity_, &right_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("joint_back_left_wheel", &left_position_, &left_velocity_, &left_effort_));
+        hardware_interface::JointStateHandle(robot_namespace+"/joint_back_left_wheel", &left_position_, &left_velocity_, &left_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle("joint_back_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+        hardware_interface::JointStateHandle(robot_namespace+"/joint_back_right_wheel", &right_position_, &right_velocity_, &right_effort_));
 
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle("joint_front_left_wheel"), &left_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle(robot_namespace+"/joint_front_left_wheel"), &left_velocity_command_));
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle("joint_front_right_wheel"), &right_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle(robot_namespace+"/joint_front_right_wheel"), &right_velocity_command_));
 
 
 
