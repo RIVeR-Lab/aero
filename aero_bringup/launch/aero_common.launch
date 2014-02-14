@@ -15,4 +15,10 @@
     <remap from="odom"     to="/aero/odom" />
     <remap from="imu_data" to="/aero/imu" />
   </node>
+
+  <node pkg="gmapping" type="slam_gmapping" ns="aero" name="gmapping">
+    <param name="odom_frame" value="aero/odom_combined"/>
+    <param name="base_frame" value="aero/base_footprint"/>
+    <remap from="scan" to="/aero/laser"/>
+  </node>
 </launch>
