@@ -5,14 +5,37 @@
   <arg name="left_ip" default="192.168.3.100"/>
   <arg name="right_ip" default="192.168.4.100"/>
 
+  <arg name="trig_rate" default="30"/>
+  <arg name="rate_sync_threshold" default="0.50" />
+
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="left_camera"
 	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)">
+    <remap from="camera" to="unsynced/left"/>
+
     <param name="ip_address" value="$(arg left_ip)"/>
-    <remap from="camera" to="left"/>
+    <param name="trigger_mode" value="fixedrate" />
+    <param name="trig_rate" value="$(arg trig_rate)" />
   </node>
+
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="right_camera"
 	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)">
+    <remap from="camera" to="unsynced/right"/>
+
     <param name="ip_address" value="$(arg right_ip)"/>
-    <remap from="camera" to="right"/>
+    <param name="trigger_mode" value="syncin2" />
+    <param name="trig_rate" value="$(arg trig_rate)" />
   </node>
+
+  <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="camera_sync"
+	args="load stereo_image_sync/StereoImageSyncNodelet $(arg nodelet_manager)">
+    <param name="left_in" value="unsynced/left/image_raw" />
+    <param name="right_in" value="unsynced/right/image_raw" />
+
+    <param name="left_out" value="left/image_raw" />
+    <param name="right_out" value="right/image_raw" />
+
+    <param name="camera_rate" value="$(arg trig_rate)" />
+    <param name="camera_rate_threshold" value="$(arg rate_sync_threshold)" />
+  </node>
+
 </launch>

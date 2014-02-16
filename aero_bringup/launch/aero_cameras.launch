@@ -6,6 +6,8 @@
     <arg name="ns" value="/aero/upper_stereo" />
     <arg name="left_ip" value="192.168.3.100" />
     <arg name="right_ip" value="192.168.4.100" />
+    <arg name="trig_rate" default="20"/>
+    <arg name="rate_sync_threshold" default="0.50" />
   </include>
 
 </launch>
