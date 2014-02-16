@@ -1,0 +1,11 @@
+<launch>
+  <node pkg="nodelet" type="nodelet" ns="/aero" name="vision_nodelet_manager"  args="manager"/>
+
+  <include file="$(find aero_bringup)/launch/aero_camera_pair.launch">
+    <arg name="nodelet_manager" value="/aero/vision_nodelet_manager" />
+    <arg name="ns" value="/aero/upper_stereo" />
+    <arg name="left_ip" value="192.168.3.100" />
+    <arg name="right_ip" value="192.168.4.100" />
+  </include>
+
+</launch>

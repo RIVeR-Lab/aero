@@ -11,7 +11,7 @@
     <param name="computer_frame" value="Computer" />
   </node>
 
-  <node pkg="manzanita_mk3_driver" type="mk3_driver" name="mk3_battery_monitor">
+  <!--<node pkg="manzanita_mk3_driver" type="mk3_driver" name="mk3_battery_monitor">
     <param name="port" value="/dev/BMS" />
 
     <param name="update_rate" value="0.25" />
@@ -27,5 +27,5 @@
     <param name="frame_id" value="/battery" />
     <param name="battery_topic" value="battery" />
     <param name="temperature_topic" value="$(arg temperature_topic)" />
-  </node>
+  </node>-->
 </launch>

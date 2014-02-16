@@ -1,4 +1,5 @@
 <launch>
+  <include file="$(find aero_description)/launch/aero_base.launch"/>
   <include file="$(find aero_control)/launch/aero_control.launch"/>
   
   <node pkg="robot_pose_ekf" type="robot_pose_ekf" ns="/aero" name="base_pose_ekf">

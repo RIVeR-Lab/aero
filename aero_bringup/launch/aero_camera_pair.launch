@@ -1,0 +1,18 @@
+<launch>
+  <arg name="nodelet_manager" default="/aero/vision_nodelet_manager"/>
+  <arg name="ns" default="/aero/stereo"/>
+
+  <arg name="left_ip" default="192.168.3.100"/>
+  <arg name="right_ip" default="192.168.4.100"/>
+
+  <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="left_camera"
+	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)">
+    <param name="ip_address" value="$(arg left_ip)"/>
+    <remap from="camera" to="left"/>
+  </node>
+  <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="right_camera"
+	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)">
+    <param name="ip_address" value="$(arg right_ip)"/>
+    <remap from="camera" to="right"/>
+  </node>
+</launch>
