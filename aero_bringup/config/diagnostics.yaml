@@ -23,6 +23,11 @@ analyzers:
             path: Right Camera
             startswith: 'aero/upper_stereo/right_camera: '
             remove_prefix: 'aero upper_stereo right_camera: '
+          Sync:
+            type: GenericAnalyzer
+            path: Camera Sync
+            startswith: 'aero/upper_stereo/camera_sync: '
+            remove_prefix: 'aero upper_stereo camera_sync: '
 #  Battery:
 #    type: GenericAnalyzer
 #    path: Battery
