@@ -2,10 +2,24 @@ pub_rate: 1.0
 base_path: ''
 analyzers:
   Compuer:
-    type: GenericAnalyzer
+    type: AnalyzerGroup
     path: Computer
-    find_and_remove_prefix: 'computer_sensors_monitor: '
+    analyzers:
+      CPU0:
+        type: GenericAnalyzer
+        path: CPU 0
+        startswith: 'computer_sensors_monitor: coretemp-isa-0000/'
+        remove_prefix: 'computer_sensors_monitor: coretemp-isa-0000 '
+      CPU1:
+        type: GenericAnalyzer
+        path: CPU 1
+        startswith: 'computer_sensors_monitor: coretemp-isa-0001/'
+        remove_prefix: 'computer_sensors_monitor: coretemp-isa-0001 '
+      Other:
+        type: DiscardAnalyzer
+        path: Other
+        startswith: 'computer_sensors_monitor: nct6776'
   Battery:
     type: GenericAnalyzer
     path: Battery
-    find_and_remove_prefix: 'mk3_battery_monitor: '
+    startswith: 'Battery Pack'
