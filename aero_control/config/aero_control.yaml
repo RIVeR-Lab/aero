@@ -7,18 +7,18 @@ aero:
   # Drive Controller
   drive_controller:
     type: robot_drive_controllers/Skid4WheelDriveController
-    left_joint_name: /aero/joint_front_left_wheel
-    right_joint_name: /aero/joint_front_right_wheel
+    left_joint_name: aero/joint_front_left_wheel
+    right_joint_name: aero/joint_front_right_wheel
     rotations_per_meter: 1.0
     base_width: 0.554
     base_length: 0.52
     odom_publish_rate: 50
-    robot_frame: /aero/base_footprint
-    odom_frame: /aero/odom
-    odom_topic: /aero/odom
+    robot_frame: aero/base_footprint
+    odom_frame: aero/odom
+    odom_topic: aero/odom
     command_topic: command
 
   # Boom Position Controller
   boom_controller:
     type: position_controllers/JointPositionController
-    joint: /aero/boom_joint
+    joint: aero/boom_joint

@@ -8,12 +8,12 @@
   <xacro:include filename="$(find aero_description)/urdf/simple_transform.urdf.xacro" />
   <xacro:include filename="$(find aero_description)/urdf/camera_boom.urdf.xacro" />
 
-  <property name="robot_ns" value="/aero" />
+  <property name="robot_ns" value="aero" />
 
   <xacro:husky robot_ns="${robot_ns}"/>
 
   <!-- Laser -->
-  <xacro:sick_laser_v0 name="${robot_ns}/laser" parent="${robot_ns}/base_link" ros_topic="${robot_ns}/laser" update_rate="25" >
+  <xacro:sick_laser_v0 name="${robot_ns}/laser" parent="${robot_ns}/base_link" ros_topic="/${robot_ns}/laser" update_rate="25" >
     <origin xyz="${base_x_size/2+0.0635} 0 0.0254" rpy="${M_PI} 0 0" />
   </xacro:sick_laser_v0>
 
@@ -111,7 +111,7 @@ data. -->
   <gazebo><!-- need to put it in it's own gazebo tag with no reference because the imu plugin is a model plugin -->
     <plugin filename="libgazebo_ros_imu.so" name="imu_controller">
       <bodyName>${robot_ns}/imu</bodyName>
-      <robotNamespace>${robot_ns}</robotNamespace>
+      <robotNamespace>/${robot_ns}</robotNamespace>
       <topicName>imu</topicName>
       <serviceName>imu/calibrate</serviceName>
       <gaussianNoise>0.0</gaussianNoise><!--TODO determine what this parameter is -->

@@ -60,32 +60,33 @@ public:
   bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
                const urdf::Model* const urdf_model, std::vector<transmission_interface::TransmissionInfo> transmissions)
   {
-    front_left_joint_ = parent_model->GetJoint(robot_namespace+"/joint_front_left_wheel");
-    back_left_joint_ = parent_model->GetJoint(robot_namespace+"/joint_back_left_wheel");
-    front_right_joint_ = parent_model->GetJoint(robot_namespace+"/joint_front_right_wheel");
-    back_right_joint_ = parent_model->GetJoint(robot_namespace+"/joint_back_right_wheel");
+    std::string joint_namespace = robot_namespace.substr(1);//remove leading slash
+    front_left_joint_ = parent_model->GetJoint(joint_namespace+"/joint_front_left_wheel");
+    back_left_joint_ = parent_model->GetJoint(joint_namespace+"/joint_back_left_wheel");
+    front_right_joint_ = parent_model->GetJoint(joint_namespace+"/joint_front_right_wheel");
+    back_right_joint_ = parent_model->GetJoint(joint_namespace+"/joint_back_right_wheel");
 
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle(robot_namespace+"/joint_front_left_wheel", &left_position_, &left_velocity_, &left_effort_));
+        hardware_interface::JointStateHandle(joint_namespace+"/joint_front_left_wheel", &left_position_, &left_velocity_, &left_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle(robot_namespace+"/joint_front_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+        hardware_interface::JointStateHandle(joint_namespace+"/joint_front_right_wheel", &right_position_, &right_velocity_, &right_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle(robot_namespace+"/joint_back_left_wheel", &left_position_, &left_velocity_, &left_effort_));
+        hardware_interface::JointStateHandle(joint_namespace+"/joint_back_left_wheel", &left_position_, &left_velocity_, &left_effort_));
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle(robot_namespace+"/joint_back_right_wheel", &right_position_, &right_velocity_, &right_effort_));
+        hardware_interface::JointStateHandle(joint_namespace+"/joint_back_right_wheel", &right_position_, &right_velocity_, &right_effort_));
 
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle(robot_namespace+"/joint_front_left_wheel"), &left_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle(joint_namespace+"/joint_front_left_wheel"), &left_velocity_command_));
     vj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle(robot_namespace+"/joint_front_right_wheel"), &right_velocity_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle(joint_namespace+"/joint_front_right_wheel"), &right_velocity_command_));
 
 
 
-    boom_joint_ = parent_model->GetJoint(robot_namespace+"/boom_joint");
+    boom_joint_ = parent_model->GetJoint(joint_namespace+"/boom_joint");
     js_interface_.registerHandle(
-        hardware_interface::JointStateHandle(robot_namespace+"/boom_joint", &boom_position_, &boom_velocity_, &boom_effort_));
+        hardware_interface::JointStateHandle(joint_namespace+"/boom_joint", &boom_position_, &boom_velocity_, &boom_effort_));
     pj_interface_.registerHandle(
-        hardware_interface::JointHandle(js_interface_.getHandle(robot_namespace+"/boom_joint"), &boom_position_command_));
+        hardware_interface::JointHandle(js_interface_.getHandle(joint_namespace+"/boom_joint"), &boom_position_command_));
 
 
     // Register interfaces

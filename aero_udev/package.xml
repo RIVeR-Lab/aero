@@ -1,0 +1,15 @@
+<package>
+
+  <name>aero_udev</name>
+  <version>1.0.0</version>
+  <license></license>
+  <description>
+     aero_udev
+  </description>
+  <maintainer email="mwills@wpi.edu">Mitchell Wills</maintainer>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>
+
+

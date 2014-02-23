@@ -133,7 +133,7 @@
 	<plugin name="${prefix}/camera_controller" filename="libgazebo_ros_multicamera.so">
 	  <alwaysOn>true</alwaysOn>
 	  <updateRate>0.0</updateRate>
-	  <cameraName>${prefix}/camera</cameraName>
+	  <cameraName>/${prefix}</cameraName>
 	  <imageTopicName>image_raw</imageTopicName>
 	  <cameraInfoTopicName>camera_info</cameraInfoTopicName>
 	  <frameName>${prefix}/optical_frame</frameName>
