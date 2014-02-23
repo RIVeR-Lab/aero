@@ -10,4 +10,10 @@
     <arg name="rate_sync_threshold" default="0.50" />
   </include>
 
+  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer">
+    <remap from="stereo" to="/aero/upper_stereo"/>
+    <remap from="image" to="image_rect"/>
+    <param name="base_link_frame_id" value="aero/base_footprint"/>
+  </node>
+
 </launch>

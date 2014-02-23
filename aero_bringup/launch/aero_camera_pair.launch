@@ -15,6 +15,7 @@
     <param name="ip_address" value="$(arg left_ip)"/>
     <param name="trigger_mode" value="fixedrate" />
     <param name="trig_rate" value="$(arg trig_rate)" />
+    <param name="frame_id" value="aero/upper_stereo/optical_frame" />
   </node>
 
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="right_camera"
@@ -24,6 +25,7 @@
     <param name="ip_address" value="$(arg right_ip)"/>
     <param name="trigger_mode" value="syncin2" />
     <param name="trig_rate" value="$(arg trig_rate)" />
+    <param name="frame_id" value="aero/upper_stereo/optical_frame" />
   </node>
 
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="camera_sync"
@@ -37,5 +39,10 @@
     <param name="camera_rate" value="$(arg trig_rate)" />
     <param name="camera_rate_threshold" value="$(arg rate_sync_threshold)" />
   </node>
+
+  <include file="$(find stereo_image_proc)/launch/stereo_image_proc.launch" ns="$(arg ns)">
+    <arg name="manager" value="$(arg nodelet_manager)" />
+  </include>
+
 
 </launch>
