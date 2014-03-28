@@ -12,7 +12,7 @@
 
     <!-- Ground -->
     <include>
-      <uri>model://vrc_heightmap_4</uri>
+      <uri>model://aero_heightmap</uri>
     </include>
 
 
