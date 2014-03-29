@@ -15,7 +15,7 @@ aero:
     odom_publish_rate: 50
     robot_frame: aero/base_footprint
     odom_frame: aero/odom
-    odom_topic: aero/odom
+    odom_topic: /aero/odom
     command_topic: command
 
   # Boom Position Controller
