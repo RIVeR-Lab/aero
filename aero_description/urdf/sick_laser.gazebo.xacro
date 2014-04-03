@@ -4,7 +4,7 @@
 
   <xacro:macro name="sick_laser_gazebo_v0" params="name ros_topic update_rate">
     <gazebo reference="${name}_link">
-      <sensor type="ray" name="${name}_sensor">
+      <sensor type="gpu_ray" name="${name}_sensor">
 	<pose>0 0 0 0 0 0</pose>
 	<visualize>false</visualize>
 	<update_rate>${update_rate}</update_rate>
@@ -28,7 +28,7 @@
 	    <stddev>0.01</stddev>
 	  </noise>
 	</ray>
-	<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+	<plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
 	  <topicName>${ros_topic}</topicName>
 	  <frameName>${name}_link</frameName>
 	</plugin>
