@@ -1,0 +1,3 @@
+<launch>
+	<node name="robot_hw" pkg="aero_hw" type="aero_base_hw_node" ns="/aero" output="screen"/>
+</launch>
