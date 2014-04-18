@@ -24,13 +24,14 @@ class AeroBaseRobot : public hardware_interface::RobotHW
 {
 public:
  AeroBaseRobot(ros::NodeHandle n = ros::NodeHandle(), std::string robot_ns="aero/"){
-    vector<std::string> drive_names = list_of(robot_ns+"left_drive")(robot_ns+"right_drive");
+    vector<std::string> drive_names = list_of(robot_ns+"joint_front_left_wheel")(robot_ns+"joint_front_right_wheel");
     drive_trans = list_of<transmission_interface::SimpleTransmission>(1.0)(1.0);
 
-    drive_motor_controller = boost::shared_ptr<RoboteqControllerHW>(new RoboteqControllerHW("/dev/DRIVE", drive_names[0], 10, 1, drive_names[1], 10, 1, act_state_interface, act_vel_interface));
+    drive_motor_controller = boost::shared_ptr<RoboteqControllerHW>(new RoboteqControllerHW("/dev/MTR", drive_names[0], 10, 1, drive_names[1], 10, 1, act_state_interface, act_vel_interface));
     
 
     for(int i = 0; i<drive_names.size(); ++i){
+      ROS_INFO_STREAM(drive_names[i]);
       hardware_interface::ActuatorHandle actuator_handle = act_vel_interface.getHandle(drive_names[i]);
       act_to_jnt_state.registerHandle(transmission_interface::ActuatorToJointStateHandle(drive_names[i],
                                                                  &drive_trans[i],
@@ -49,6 +50,7 @@ public:
 
 
       jnt_state_interface.registerHandle(drive_joint_data[i].state_handle(drive_names[i]));
+      jnt_vel_interface.registerHandle(hardware_interface::JointHandle(jnt_state_interface.getHandle(drive_names[i]), &drive_joint_data[i].cmd));
     }
 
     registerInterface(&act_state_interface);

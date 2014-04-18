@@ -14,7 +14,7 @@ int main( int argc, char** argv ){
   spinner.start();
 
   //won't run this is simulation so regular time is ok
-  ros::Rate controller_rate(50);
+  ros::Rate controller_rate(10);
   ros::Time last = ros::Time::now();
   while (ros::ok())
   {

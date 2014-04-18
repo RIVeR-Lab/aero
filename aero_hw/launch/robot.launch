@@ -1,3 +1,9 @@
 <launch>
 	<node name="robot_hw" pkg="aero_hw" type="aero_base_hw_node" ns="/aero" output="screen"/>
+
+  <node pkg="kvh_driver" type="kvh_driver_node" ns="/aero" name="imu_node">
+    <param name="device_id" value="kvh-1750" />
+    <param name="device_address" value="/dev/IMU" />
+    <param name="imu_topic" value="imu" />
+  </node>
 </launch>
