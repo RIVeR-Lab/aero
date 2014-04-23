@@ -1,7 +1,6 @@
 <launch>
   <include file="$(find aero_bringup)/launch/aero_common.launch"/>
   <include file="$(find aero_bringup)/launch/aero_diagnostics.launch"/>
-
-  <include file="$(find aero_bringup)/launch/aero_cameras.launch">
-  </include>
+  <include file="$(find aero_hw)/launch/robot.launch"/>
+  <include file="$(find aero_bringup)/launch/aero_cameras.launch"/>
 </launch>

@@ -1,24 +1,30 @@
-aero:
-  # Publish all joint states -----------------------------------
-  joint_state_controller:
-    type: joint_state_controller/JointStateController
-    publish_rate: 50
-  
-  # Drive Controller
-  drive_controller:
-    type: robot_drive_controllers/Skid4WheelDriveController
-    left_joint_name: aero/joint_front_left_wheel
-    right_joint_name: aero/joint_front_right_wheel
-    rotations_per_meter: 1.0
-    base_width: 0.554
-    base_length: 0.52
-    odom_publish_rate: 50
-    robot_frame: aero/base_footprint
-    odom_frame: aero/odom
-    odom_topic: aero/odom
-    command_topic: command
+# Publish all joint states -----------------------------------
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
 
-  # Boom Position Controller
-  boom_controller:
-    type: position_controllers/JointPositionController
-    joint: aero/boom_joint
+# Drive Velocity Controller
+left_drive_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: aero/joint_front_left_wheel
+right_drive_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: aero/joint_front_right_wheel
+
+# Drive Controller
+drive_controller:
+  left_joint_name: aero/joint_front_left_wheel
+  right_joint_name: aero/joint_front_right_wheel
+  rotations_per_meter: 1.0
+  base_width: 0.554
+  base_length: 0.52
+  odom_publish_rate: 50
+  robot_frame: aero/base_footprint
+  odom_frame: aero/odom
+  odom_topic: /aero/odom
+  command_topic: /aero/cmd_vel
+
+# Boom Position Controller
+boom_controller:
+  type: position_controllers/JointPositionController
+  joint: aero/boom_joint
