@@ -24,6 +24,7 @@ class AeroBaseRobot : public hardware_interface::RobotHW
 {
 public:
  AeroBaseRobot(ros::NodeHandle n = ros::NodeHandle(), std::string robot_ns="aero/"){
+    std::string boom_name = robot_ns+"boom_joint";
     vector<std::string> drive_names = list_of(robot_ns+"joint_front_left_wheel")(robot_ns+"joint_front_right_wheel");
     drive_trans = list_of<transmission_interface::SimpleTransmission>(1.0)(1.0);
 
@@ -53,10 +54,15 @@ public:
       jnt_vel_interface.registerHandle(hardware_interface::JointHandle(jnt_state_interface.getHandle(drive_names[i]), &drive_joint_data[i].cmd));
     }
 
+    jnt_state_interface.registerHandle(boom_joint_data.state_handle(boom_name));
+    jnt_pos_interface.registerHandle(hardware_interface::JointHandle(jnt_state_interface.getHandle(boom_name), &boom_joint_data.cmd));
+
     registerInterface(&act_state_interface);
     registerInterface(&act_vel_interface);
+    registerInterface(&act_pos_interface);
     registerInterface(&jnt_state_interface);
     registerInterface(&jnt_vel_interface);
+    registerInterface(&jnt_pos_interface);
     registerInterface(&act_to_jnt_state);
     registerInterface(&jnt_to_act_vel);
   }
@@ -74,14 +80,17 @@ public:
   boost::shared_ptr<RoboteqControllerHW> drive_motor_controller;  
   hardware_interface::ActuatorStateInterface act_state_interface;
   hardware_interface::VelocityActuatorInterface act_vel_interface;
+  hardware_interface::PositionActuatorInterface act_pos_interface;
   hardware_interface::JointStateInterface jnt_state_interface;
   hardware_interface::VelocityJointInterface jnt_vel_interface;
+  hardware_interface::PositionJointInterface jnt_pos_interface;
   transmission_interface::ActuatorToJointStateInterface act_to_jnt_state;
   transmission_interface::JointToActuatorVelocityInterface jnt_to_act_vel;
 
   std::vector<transmission_interface::SimpleTransmission> drive_trans;
 
   river_ros_util::JointData drive_joint_data[2];
+  river_ros_util::JointData boom_joint_data;
 };
 
 }
