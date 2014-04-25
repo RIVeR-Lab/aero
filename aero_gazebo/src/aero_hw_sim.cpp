@@ -18,6 +18,8 @@
 // URDF
 #include <urdf/model.h>
 
+#include <safety_interface/safety_interface.h>
+
 namespace aero_gazebo
 {
 
@@ -55,6 +57,7 @@ private:
   hardware_interface::JointStateInterface js_interface_;
   hardware_interface::VelocityJointInterface vj_interface_;
   hardware_interface::PositionJointInterface pj_interface_;
+  safety_interface::SafetyInterface safety_interface_;
 
 public:
   bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
@@ -93,6 +96,7 @@ public:
     registerInterface(&js_interface_);
     registerInterface(&vj_interface_);
     registerInterface(&pj_interface_);
+    registerInterface(&safety_interface_);
 
     return true;
   }
@@ -115,16 +119,24 @@ public:
 
   void writeSim(ros::Time time, ros::Duration period)
   {
-    front_left_joint_->SetVelocity(0, left_velocity_command_);
-    front_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
-    back_left_joint_->SetVelocity(0, left_velocity_command_);
-    back_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
-    front_right_joint_->SetVelocity(0, right_velocity_command_);
-    front_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
-    back_right_joint_->SetVelocity(0, right_velocity_command_);
-    back_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
+    if(safety_interface_.get_state() == safety_interface::safety_state::OK){
+      front_left_joint_->SetVelocity(0, left_velocity_command_);
+      front_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
+      back_left_joint_->SetVelocity(0, left_velocity_command_);
+      back_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
+      front_right_joint_->SetVelocity(0, right_velocity_command_);
+      front_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
+      back_right_joint_->SetVelocity(0, right_velocity_command_);
+      back_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
 
-    boom_joint_->SetAngle(0, boom_position_command_);
+      boom_joint_->SetAngle(0, boom_position_command_);
+    }
+    else{
+      front_left_joint_->SetVelocity(0, 0);
+      back_left_joint_->SetVelocity(0, 0);
+      front_right_joint_->SetVelocity(0, 0);
+      back_right_joint_->SetVelocity(0, 0);
+    }
   }
 
 };

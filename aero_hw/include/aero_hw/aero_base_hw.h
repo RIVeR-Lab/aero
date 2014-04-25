@@ -8,6 +8,7 @@
 #include <hardware_interface/robot_hw.h>
 #include <transmission_interface/transmission_info.h>
 #include <transmission_interface/transmission_parser.h>
+#include <safety_interface/safety_interface.h>
 #include <boost/shared_ptr.hpp>
 #include <river_ros_util/ros_util.h>
 #include <river_ros_util/ros_control_util.h>
@@ -28,7 +29,7 @@ public:
     vector<std::string> drive_names = list_of(robot_ns+"joint_front_left_wheel")(robot_ns+"joint_front_right_wheel");
     drive_trans = list_of<transmission_interface::SimpleTransmission>(1.0)(1.0);
 
-    drive_motor_controller = boost::shared_ptr<RoboteqControllerHW>(new RoboteqControllerHW(n, "/dev/MTR", drive_names[0], 10, 1, drive_names[1], 10, 1, act_state_interface, act_vel_interface));
+    drive_motor_controller = boost::shared_ptr<RoboteqControllerHW>(new RoboteqControllerHW(n, "/dev/MTR", drive_names[0], 10, 1, drive_names[1], 10, 1, act_state_interface, act_vel_interface, safety_interface));
     
 
     for(int i = 0; i<drive_names.size(); ++i){
@@ -65,6 +66,7 @@ public:
     registerInterface(&jnt_pos_interface);
     registerInterface(&act_to_jnt_state);
     registerInterface(&jnt_to_act_vel);
+    registerInterface(&safety_interface);
   }
 
   void read(){
@@ -86,6 +88,7 @@ public:
   hardware_interface::PositionJointInterface jnt_pos_interface;
   transmission_interface::ActuatorToJointStateInterface act_to_jnt_state;
   transmission_interface::JointToActuatorVelocityInterface jnt_to_act_vel;
+  safety_interface::SafetyInterface safety_interface;
 
   std::vector<transmission_interface::SimpleTransmission> drive_trans;
 

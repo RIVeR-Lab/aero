@@ -28,3 +28,6 @@ drive_controller:
 boom_controller:
   type: position_controllers/JointPositionController
   joint: aero/boom_joint
+
+safety_topic_controller:
+  type: safety_interface/SafetyTopicController

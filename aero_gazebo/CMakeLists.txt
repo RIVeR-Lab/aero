@@ -13,7 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   joint_limits_interface
   urdf
-  gazebo_ros_control)
+  gazebo_ros_control
+  safety_interface)
 
 find_package(gazebo REQUIRED)
 
@@ -26,6 +27,7 @@ catkin_package(
       pluginlib
       transmission_interface
       gazebo_ros_control
+      safety_interface
     INCLUDE_DIRS
     LIBRARIES gazebo
 )
