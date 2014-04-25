@@ -25,11 +25,12 @@ class AeroBaseRobot : public hardware_interface::RobotHW
 {
 public:
  AeroBaseRobot(ros::NodeHandle n = ros::NodeHandle(), std::string robot_ns="aero/"){
+    memset(drive_joint_data, 0, sizeof(drive_joint_data));
     std::string boom_name = robot_ns+"boom_joint";
     vector<std::string> drive_names = list_of(robot_ns+"joint_front_left_wheel")(robot_ns+"joint_front_right_wheel");
-    drive_trans = list_of<transmission_interface::SimpleTransmission>(1.0)(1.0);
+    drive_trans = list_of<transmission_interface::SimpleTransmission>(15.0)(15.0);
 
-    drive_motor_controller = boost::shared_ptr<RoboteqControllerHW>(new RoboteqControllerHW(n, "/dev/MTR", drive_names[0], 10, 1, drive_names[1], 10, 1, act_state_interface, act_vel_interface, safety_interface));
+    drive_motor_controller = boost::shared_ptr<RoboteqControllerHW>(new RoboteqControllerHW(n, "/dev/MTR", drive_names[0], 1800, 5000, drive_names[1], 1800, 5000, act_state_interface, act_vel_interface, safety_interface));
     
 
     for(int i = 0; i<drive_names.size(); ++i){
