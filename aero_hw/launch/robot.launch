@@ -9,4 +9,6 @@
     <param name="device_address" value="/dev/IMU" />
     <param name="imu_topic" value="imu" />
   </node>
+
+  <include file="$(find aero_hw)/launch/arm.launch"/>
 </launch>
