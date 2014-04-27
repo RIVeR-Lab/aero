@@ -11,6 +11,7 @@
 #include <ros/ros.h>
 #include <angles/angles.h>
 #include <pluginlib/class_list_macros.h>
+#include <std_msgs/Bool.h>
 
 // gazebo_ros_control
 #include <gazebo_ros_control/robot_hw_sim.h>
@@ -58,11 +59,17 @@ private:
   hardware_interface::VelocityJointInterface vj_interface_;
   hardware_interface::PositionJointInterface pj_interface_;
   safety_interface::SafetyInterface safety_interface_;
+  ros::Publisher imu_cal_pub_;
 
 public:
   bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
                const urdf::Model* const urdf_model, std::vector<transmission_interface::TransmissionInfo> transmissions)
   {
+    imu_cal_pub_ = model_nh.advertise<std_msgs::Bool>("imu/is_calibrated", 1, true);
+    std_msgs::Bool imu_cal_msg;
+    imu_cal_msg.data = true;
+    imu_cal_pub_.publish(imu_cal_msg);
+
     std::string joint_namespace = robot_namespace.substr(1);//remove leading slash
     front_left_joint_ = parent_model->GetJoint(joint_namespace+"/joint_front_left_wheel");
     back_left_joint_ = parent_model->GetJoint(joint_namespace+"/joint_back_left_wheel");

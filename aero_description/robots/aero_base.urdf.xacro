@@ -112,7 +112,7 @@ data. -->
     <plugin filename="libgazebo_ros_imu.so" name="imu_controller">
       <bodyName>${robot_ns}/imu</bodyName>
       <robotNamespace>/${robot_ns}</robotNamespace>
-      <topicName>imu</topicName>
+      <topicName>imu/data</topicName>
       <serviceName>imu/calibrate</serviceName>
       <gaussianNoise>0.0</gaussianNoise><!--TODO determine what this parameter is -->
     </plugin>
