@@ -10,6 +10,16 @@
     <arg name="rate_sync_threshold" default="0.50" />
   </include>
 
+  <include file="$(find aero_bringup)/launch/aero_camera_pair.launch">
+    <arg name="nodelet_manager" value="/aero/vision_nodelet_manager" />
+    <arg name="ns" value="/aero/lower_stereo" />
+    <arg name="left_ip" value="192.168.1.100" />
+    <arg name="right_ip" value="192.168.2.100" />
+    <arg name="trig_rate" default="20"/>
+    <arg name="rate_sync_threshold" default="0.50" />
+  </include>
+
+
   <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer">
     <remap from="stereo" to="/aero/upper_stereo"/>
     <remap from="image" to="image_rect"/>
