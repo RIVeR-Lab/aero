@@ -7,7 +7,8 @@
   <node pkg="kvh_driver" type="kvh_driver_node" ns="/aero" name="imu_node">
     <param name="device_id" value="kvh-1750" />
     <param name="device_address" value="/dev/IMU" />
-    <param name="imu_topic" value="imu" />
+    <param name="imu_topic" value="imu/data" />
+    <remap from="is_calibrated" to="imu/is_calibrated"/>
   </node>
 
   <include file="$(find aero_hw)/launch/arm.launch"/>
