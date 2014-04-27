@@ -17,6 +17,7 @@
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>robot_drive_controllers</run_depend>
   <run_depend>joint_state_controller</run_depend>
+  <run_depend>safety_controller</run_depend>
 
   <export>
   </export>

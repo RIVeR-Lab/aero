@@ -1,9 +1,24 @@
 <launch>
 	<node name="robot_hw" pkg="aero_hw" type="aero_base_hw_node" ns="/aero" output="screen"/>
 
+  <node pkg="aero_hw" type="aero_arduino_controller_node" ns="/aero" name="arduino_controller_node" output="screen"/>
+  <node pkg="rosserial_python" type="serial_node.py" ns="/aero" name="arduino_rosserial" output="screen" args="/dev/ARDUINO"/>
+
   <node pkg="kvh_driver" type="kvh_driver_node" ns="/aero" name="imu_node">
     <param name="device_id" value="kvh-1750" />
     <param name="device_address" value="/dev/IMU" />
-    <param name="imu_topic" value="imu" />
+    <param name="imu_topic" value="imu/data" />
+    <param name="imu_frame" value="aero/base_footprint" />
+    <param name="odom_topic" value="imu/odom" />
+    <param name="odom_frame" value="aero/odom" />
+    <remap from="is_calibrated" to="imu/is_calibrated"/>
   </node>
+
+  <node pkg="lms1xx" type="LMS1xx_node" name="LMS100" output="screen" ns="/aero">
+    <param name="host" value="192.168.0.1"/>
+    <param name="frame_id" value="aero/laser_link"/>
+    <remap from="scan" to="laser"/>
+  </node>
+
+  <include file="$(find aero_hw)/launch/arm.launch"/>
 </launch>

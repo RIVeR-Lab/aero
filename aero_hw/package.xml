@@ -19,6 +19,8 @@
   <build_depend>transmission_interface</build_depend>
   <build_depend>device_driver_base</build_depend>
   <build_depend>roboteq_driver</build_depend>
+  <build_depend>safety_interface</build_depend>
+  <build_depend>rosserial_arduino</build_depend>
   <run_depend>control_toolbox</run_depend>
   <run_depend>controller_manager</run_depend>
   <run_depend>hardware_interface</run_depend>
@@ -27,6 +29,9 @@
   <run_depend>transmission_interface</run_depend>
   <run_depend>device_driver_base</run_depend>
   <run_depend>roboteq_driver</run_depend>
+  <run_depend>safety_interface</run_depend>
+  <run_depend>rosserial_python</run_depend>
+  <run_depend>rosserial_arduino</run_depend>
 
 
   <export>

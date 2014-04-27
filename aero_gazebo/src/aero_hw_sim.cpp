@@ -11,12 +11,15 @@
 #include <ros/ros.h>
 #include <angles/angles.h>
 #include <pluginlib/class_list_macros.h>
+#include <std_msgs/Bool.h>
 
 // gazebo_ros_control
 #include <gazebo_ros_control/robot_hw_sim.h>
 
 // URDF
 #include <urdf/model.h>
+
+#include <safety_interface/safety_interface.h>
 
 namespace aero_gazebo
 {
@@ -55,11 +58,18 @@ private:
   hardware_interface::JointStateInterface js_interface_;
   hardware_interface::VelocityJointInterface vj_interface_;
   hardware_interface::PositionJointInterface pj_interface_;
+  safety_interface::SafetyInterface safety_interface_;
+  ros::Publisher imu_cal_pub_;
 
 public:
   bool initSim(const std::string& robot_namespace, ros::NodeHandle model_nh, gazebo::physics::ModelPtr parent_model,
                const urdf::Model* const urdf_model, std::vector<transmission_interface::TransmissionInfo> transmissions)
   {
+    imu_cal_pub_ = model_nh.advertise<std_msgs::Bool>("imu/is_calibrated", 1, true);
+    std_msgs::Bool imu_cal_msg;
+    imu_cal_msg.data = true;
+    imu_cal_pub_.publish(imu_cal_msg);
+
     std::string joint_namespace = robot_namespace.substr(1);//remove leading slash
     front_left_joint_ = parent_model->GetJoint(joint_namespace+"/joint_front_left_wheel");
     back_left_joint_ = parent_model->GetJoint(joint_namespace+"/joint_back_left_wheel");
@@ -93,6 +103,7 @@ public:
     registerInterface(&js_interface_);
     registerInterface(&vj_interface_);
     registerInterface(&pj_interface_);
+    registerInterface(&safety_interface_);
 
     return true;
   }
@@ -115,16 +126,24 @@ public:
 
   void writeSim(ros::Time time, ros::Duration period)
   {
-    front_left_joint_->SetVelocity(0, left_velocity_command_);
-    front_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
-    back_left_joint_->SetVelocity(0, left_velocity_command_);
-    back_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
-    front_right_joint_->SetVelocity(0, right_velocity_command_);
-    front_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
-    back_right_joint_->SetVelocity(0, right_velocity_command_);
-    back_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
+    if(safety_interface_.get_state() == safety_interface::safety_state::OK){
+      front_left_joint_->SetVelocity(0, left_velocity_command_);
+      front_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
+      back_left_joint_->SetVelocity(0, left_velocity_command_);
+      back_left_joint_->SetMaxForce(0, max_drive_joint_torque_);
+      front_right_joint_->SetVelocity(0, right_velocity_command_);
+      front_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
+      back_right_joint_->SetVelocity(0, right_velocity_command_);
+      back_right_joint_->SetMaxForce(0, max_drive_joint_torque_);
 
-    boom_joint_->SetAngle(0, boom_position_command_);
+      boom_joint_->SetAngle(0, boom_position_command_);
+    }
+    else{
+      front_left_joint_->SetVelocity(0, 0);
+      back_left_joint_->SetVelocity(0, 0);
+      front_right_joint_->SetVelocity(0, 0);
+      back_right_joint_->SetVelocity(0, 0);
+    }
   }
 
 };

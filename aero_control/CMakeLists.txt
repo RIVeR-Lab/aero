@@ -6,7 +6,7 @@ find_package(catkin REQUIRED COMPONENTS)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES aero_control
-  CATKIN_DEPENDS ros_control ros_controllers controller_manager robot_state_publisher robot_drive_controllers joint_state_controller
+  CATKIN_DEPENDS ros_control ros_controllers controller_manager robot_state_publisher robot_drive_controllers joint_state_controller safety_controller
 #  DEPENDS system_lib
 )
 

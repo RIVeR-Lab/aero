@@ -10,12 +10,14 @@ find_package(catkin REQUIRED COMPONENTS
   transmission_interface
   device_driver_base
   roboteq_driver
+  safety_interface
+  rosserial_arduino
 )
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES 
-  CATKIN_DEPENDS control_toolbox controller_manager hardware_interface roscpp river_ros_util transmission_interface device_driver_base roboteq_driver
+  CATKIN_DEPENDS control_toolbox controller_manager hardware_interface roscpp river_ros_util transmission_interface device_driver_base roboteq_driver safety_interface rosserial_arduino rosserial_python
   DEPENDS 
 )
 
@@ -31,6 +33,11 @@ target_link_libraries(aero_base_hw_node
   ${catkin_LIBRARIES}
 )
 
+add_executable(aero_arduino_controller_node
+	src/aero_arduino_controller_node.cpp)
+target_link_libraries(aero_arduino_controller_node
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
