@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="robot_teleop" type="joystick_twist_teleop" name="$(anon joystick_teleop)" output="screen" ns="/aero">
+  <node pkg="joy" type="joy_node" name="$(anon joy)"/>
+  </node>
+</launch>
