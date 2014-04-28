@@ -28,7 +28,7 @@ public:
     memset(drive_joint_data, 0, sizeof(drive_joint_data));
     std::string boom_name = robot_ns+"boom_joint";
     vector<std::string> drive_names = list_of(robot_ns+"joint_front_left_wheel")(robot_ns+"joint_front_right_wheel");
-    drive_trans = list_of<transmission_interface::SimpleTransmission>(15.0)(15.0);
+    drive_trans = list_of<transmission_interface::SimpleTransmission>(-15.0)(-15.0);
 
     drive_motor_controller = boost::shared_ptr<RoboteqControllerHW>(new RoboteqControllerHW(n, "/dev/MTR", drive_names[0], 1800, 5000, drive_names[1], 1800, 5000, act_state_interface, act_vel_interface, safety_interface));
     

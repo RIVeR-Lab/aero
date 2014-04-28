@@ -74,7 +74,7 @@
 		  <joint name="${robot_ns}/joint_${fb}_${lr}_wheel"/>
 		  <actuator name="${robot_ns}/${lr}_wheel_motor">
 		    <hardwareInterface>VelocityJointInterface</hardwareInterface>
-		    <mechanicalReduction>15</mechanicalReduction>
+		    <mechanicalReduction>-15</mechanicalReduction>
 		  </actuator>
 		</transmission>
    
