@@ -1,5 +1,8 @@
 <launch>
-  <node pkg="robot_teleop" type="joystick_twist_teleop" name="$(anon joystick_teleop)" output="screen" ns="/aero">
-  <node pkg="joy" type="joy_node" name="$(anon joy)"/>
+  <node pkg="robot_teleop" type="joystick_twist.py" name="$(anon joystick_teleop)" output="screen" ns="/aero">
+  </node>
+  <node pkg="joy" type="joy_node" name="$(anon joy)" ns="/aero">
+    <param name="autorepeat_rate" value="5"/>
+    <param name="deadzone" value="0.1"/>
   </node>
 </launch>
