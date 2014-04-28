@@ -10,7 +10,7 @@
   <arg name="rate_sync_threshold" default="0.50" />
 
   <arg name="auto_exposure" default="false" />
-  <arg name="exposure" default="0.0008" />
+  <arg name="exposure" default="0.001" />
   <arg name="auto_gain" default="false" />
   <arg name="gain" default="0" />
 
