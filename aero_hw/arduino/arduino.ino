@@ -36,10 +36,16 @@ void loop(){
   bool_msg.data = pulse_length>1400;//will not pause if pulseIn timed out (no pulse = 0)
   pause_pub.publish( &bool_msg );
 
+  double flash_rate;
+  if(nh.connected())
+    flash_rate = 1;
+  else
+    flash_rate = 2;
+
    if( !bool_msg.data)
 {
       unsigned long time = millis();
-      if(time-last_invert>=(1000/1/2)){
+      if(time-last_invert>=(1000/flash_rate/2)){
 	digitalWrite(LIGHT_PIN, !digitalRead(LIGHT_PIN));
 	last_invert = time;
     }
@@ -49,8 +55,6 @@ void loop(){
 {
       digitalWrite(LIGHT_PIN, LIGHT_ON);
   }
-
-  delay(50);
 
   nh.spinOnce();
 }
