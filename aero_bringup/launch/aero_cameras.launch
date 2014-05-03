@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="nodelet" type="nodelet" ns="/aero" name="vision_nodelet_manager"  args="manager"/>
+  <node pkg="nodelet" type="nodelet" ns="/aero" name="vision_nodelet_manager" output="screen"  args="manager"/>
 
   <include file="$(find aero_bringup)/launch/aero_camera_pair.launch">
     <arg name="nodelet_manager" value="/aero/vision_nodelet_manager" />
@@ -24,10 +24,11 @@
   </include>
 
 
-  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer">
-    <remap from="stereo" to="/aero/upper_stereo"/>
-    <remap from="image" to="image_rect"/>
+  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer" ns="/aero">
+    <remap from="stereo" to="upper_stereo"/>
+    <remap from="image" to="/image_rect"/>
     <param name="base_link_frame_id" value="aero/base_footprint"/>
+    <param name="publish_tf" value="false"/>
   </node>
 
 </launch>
