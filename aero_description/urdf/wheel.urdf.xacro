@@ -67,6 +67,7 @@
 			<axis xyz="0 1 0" rpy="0 0 0" />
 			<limit effort="100" velocity="100"/>
 			<joint_properties damping="0.0" friction="0.0"/>
+			<mimic joint="${robot_ns}/joint_front_${lr}_wheel" multiplier="1.0" offset="0.0" />
 		</joint>
 
 		<transmission name="${robot_ns}/${fb}_${lr}_wheel_tran">
