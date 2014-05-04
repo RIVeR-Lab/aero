@@ -12,7 +12,7 @@
     <param name="device_id" value="kvh-1750" />
     <param name="device_address" value="/dev/IMU" />
     <param name="imu_topic" value="imu/data" />
-    <param name="imu_frame" value="aero/base_footprint" />
+    <param name="imu_frame" value="aero/imu" />
     <param name="odom_topic" value="imu/odom" />
     <param name="odom_frame" value="aero/odom" />
     <remap from="is_calibrated" to="imu/is_calibrated"/>
