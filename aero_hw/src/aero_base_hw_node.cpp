@@ -6,6 +6,10 @@
 int main( int argc, char** argv ){
   ros::init(argc, argv, "aero_base_hw");
   ros::NodeHandle nh;
+  ros::NodeHandle pnh("~");
+
+  double rate;
+  pnh.param<double>("controller_rate", rate, 20);
 
   aero_hw::AeroBaseRobot robot;
   controller_manager::ControllerManager cm(&robot, nh);
@@ -14,8 +18,9 @@ int main( int argc, char** argv ){
   spinner.start();
 
   //won't run this is simulation so regular time is ok
-  ros::Rate controller_rate(10);
+  ros::Rate controller_rate(rate);
   ros::Time last = ros::Time::now();
+  ROS_INFO_STREAM("Running controller at rate: " << rate);
   while (ros::ok())
   {
     robot.read();

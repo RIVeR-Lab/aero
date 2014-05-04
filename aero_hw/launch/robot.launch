@@ -1,7 +1,11 @@
 <launch>
-	<node name="robot_hw" pkg="aero_hw" type="aero_base_hw_node" ns="/aero" output="screen"/>
+  <node name="robot_hw" pkg="aero_hw" type="aero_base_hw_node" ns="/aero" output="screen">
+    <param name="controller_rate" value="30.0" />
+  </node>
 
-  <node pkg="aero_hw" type="aero_arduino_controller_node" ns="/aero" name="arduino_controller_node" output="screen"/>
+  <node pkg="aero_hw" type="aero_arduino_controller_node" ns="/aero" name="arduino_controller_node" output="screen">
+  </node>
+
   <node pkg="rosserial_python" type="serial_node.py" ns="/aero" name="arduino_rosserial" output="screen" args="/dev/ARDUINO"/>
 
   <node pkg="kvh_driver" type="kvh_driver_node" ns="/aero" name="imu_node">
