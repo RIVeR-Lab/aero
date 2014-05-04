@@ -58,13 +58,13 @@
     </inertial>
   </xacro:static_transform>
 
-<!--    <xacro:manta_cam_v0 frame_name="${prefix}/left_camera" parent="${prefix}/camera_rail_tilt" camera_name="${prefix}/left">
+    <xacro:manta_cam_v0 frame_name="${prefix}/left_camera" parent="${prefix}/camera_rail_tilt" camera_name="${prefix}/left">
       <origin xyz="0.03 ${camera_base_length/2} ${manta_camera_height/2+camera_rail_height/2}" rpy="0 0 0" />
     </xacro:manta_cam_v0> 
     
     <xacro:manta_cam_v0 frame_name="${prefix}/right_camera" parent="${prefix}/camera_rail_tilt" camera_name="${prefix}/right">
       <origin xyz="0.03 ${-camera_base_length/2} ${manta_camera_height/2+camera_rail_height/2}" rpy="0 0 0" />
-    </xacro:manta_cam_v0> -->
+    </xacro:manta_cam_v0>
 
     <xacro:static_transform parent="${prefix}/camera_rail_tilt" name="${prefix}/optical_frame" xyz="0.03 0 ${manta_camera_height/2+camera_rail_height/2}" rpy="${-M_PI/2} 0 ${-M_PI/2}">
       <visual>
