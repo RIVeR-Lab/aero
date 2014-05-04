@@ -42,6 +42,25 @@ analyzers:
             path: Camera Sync
             startswith: 'aero/upper_stereo/camera_sync: '
             remove_prefix: 'aero upper_stereo camera_sync: '
+      LowerStereo:
+        type: AnalyzerGroup
+        path: Lower Stereo
+        analyzers:
+          LeftCamera:
+            type: GenericAnalyzer
+            path: Left Camera
+            startswith: 'aero/lower_stereo/left_camera: '
+            remove_prefix: 'aero lower_stereo left_camera: '
+          RightCamera:
+            type: GenericAnalyzer
+            path: Right Camera
+            startswith: 'aero/lower_stereo/right_camera: '
+            remove_prefix: 'aero lower_stereo right_camera: '
+          Sync:
+            type: GenericAnalyzer
+            path: Camera Sync
+            startswith: 'aero/lower_stereo/camera_sync: '
+            remove_prefix: 'aero lower_stereo camera_sync: '
   Battery:
     type: GenericAnalyzer
     path: Battery
