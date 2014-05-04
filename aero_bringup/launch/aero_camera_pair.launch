@@ -15,7 +15,7 @@
   <arg name="gain" default="0" />
 
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="left_camera"
-	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)">
+	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)" respawn="true">
     <remap from="camera" to="unsynced/left"/>
 
     <param name="ip_address" value="$(arg left_ip)"/>
@@ -29,7 +29,7 @@
   </node>
 
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="right_camera"
-	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)">
+	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)" respawn="true">
     <remap from="camera" to="unsynced/right"/>
 
     <param name="ip_address" value="$(arg right_ip)"/>
@@ -43,7 +43,7 @@
   </node>
 
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="camera_sync"
-	args="load stereo_image_sync/StereoImageSyncNodelet $(arg nodelet_manager)">
+	args="load stereo_image_sync/StereoImageSyncNodelet $(arg nodelet_manager)" respawn="true">
     <param name="left_in" value="unsynced/left/image_raw" />
     <param name="right_in" value="unsynced/right/image_raw" />
 
