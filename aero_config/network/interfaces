@@ -1,0 +1,42 @@
+auto lo
+iface lo inet loopback
+
+auto eth-back
+iface eth-back inet dhcp
+
+auto eth-cam-bl
+iface eth-cam-bl inet static
+address 192.168.1.2
+netmask 255.255.255.0
+mtu 9000
+
+auto eth-cam-br
+iface eth-cam-br inet static
+address 192.168.2.2
+netmask 255.255.255.0
+mtu 9000
+
+auto eth-cam-tl
+iface eth-cam-tl inet static
+address 192.168.3.2
+netmask 255.255.255.0
+mtu 9000
+
+auto eth-cam-tr
+iface eth-cam-tr inet static
+address 192.168.4.2
+netmask 255.255.255.0
+mtu 9000
+
+auto eth-lidar
+iface eth-lidar inet static
+address 192.168.0.2
+netmask 255.255.255.0
+
+auto wlan0
+iface wlan0 inet static
+address 10.0.0.1
+netmask 255.0.0.0
+wireless-channel 1
+wireless-essid aero_wifi
+wireless-mode ad-hoc

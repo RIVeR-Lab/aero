@@ -1,10 +1,10 @@
 <package>
 
-  <name>aero_udev</name>
+  <name>aero_config</name>
   <version>1.0.0</version>
   <license></license>
   <description>
-     aero_udev
+     aero_config
   </description>
   <maintainer email="mwills@wpi.edu">Mitchell Wills</maintainer>
 
