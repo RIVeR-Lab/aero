@@ -27,6 +27,7 @@
   <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer" ns="/aero">
     <remap from="stereo" to="upper_stereo"/>
     <remap from="image" to="/image_rect"/>
+    <param name="odom_frame_id" value="aero/odom"/>
     <param name="base_link_frame_id" value="aero/base_footprint"/>
     <param name="publish_tf" value="false"/>
   </node>
