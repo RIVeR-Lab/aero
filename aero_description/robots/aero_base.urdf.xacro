@@ -7,6 +7,7 @@
   <xacro:include filename="$(find aero_description)/urdf/sick_laser.urdf.xacro" />
   <xacro:include filename="$(find aero_description)/urdf/simple_transform.urdf.xacro" />
   <xacro:include filename="$(find aero_description)/urdf/camera_boom.urdf.xacro" />
+  <xacro:include filename="$(find jaco_model)/urdf/jaco_arm.xacro" />
 
   <property name="robot_ns" value="aero" />
 
@@ -69,6 +70,57 @@
 	  izz="1.0"/>
     </inertial>
   </xacro:static_transform>
+
+  <!-- Arm Base -->
+  <xacro:static_transform parent="aero/base_link" name="aero/arm_mount" xyz="0.3429 0 -0.023588" rpy="0 0 0">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+	<box size="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+	<box size="0.01 0.01 0.01" />
+      </geometry>
+      <material name="Blue" />
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+  </xacro:static_transform>
+  <xacro:static_transform parent="aero/arm_mount" name="arm_base" xyz="0 0 0" rpy="0 0 ${-M_PI/2}">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+	<box size="0.01 0.01 0.01" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+	<box size="0.01 0.01 0.01" />
+      </geometry>
+      <material name="Blue" />
+    </visual>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+  </xacro:static_transform>
+  <xacro:jaco_arm  parent="arm_base"/>
+
+
   <gazebo reference="${robot_ns}/imu">
     <sensor name="imu_sensor" type="imu"><!--from atlas-->
       <always_on>1</always_on>
