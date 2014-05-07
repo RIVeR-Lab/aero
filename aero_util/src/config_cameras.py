@@ -40,13 +40,13 @@ def main():
     # Prompt for new parameters
     lower_exposure = float(input('Lower exposure: '));
     lower_gain = float(input('Lower gain: '));
-    lower_whitebalance_red = float(input('Lower whitebalance red: ')
-    lower_whitebalance_blue = float(input('Lower whitebalance blue: ')
+    lower_whitebalance_red = float(input('Lower whitebalance red: '));
+    lower_whitebalance_blue = float(input('Lower whitebalance blue: '));
 
     upper_exposure = float(input('Upper exposure: '));
     upper_gain = float(input('Upper gain: '));
-    upper_whitebalance_red = float(input('Upper whitebalance red: ')
-    upper_whitebalance_blue = float(input('Upper whitebalance blue: ')
+    upper_whitebalance_red = float(input('Upper whitebalance red: '));
+    upper_whitebalance_blue = float(input('Upper whitebalance blue: '));
     
     # Set new parameters
     lower_params = { 'auto_exposure': False, 'exposure' : lower_exposure,
