@@ -8,7 +8,7 @@
     <arg name="left_ip" value="192.168.3.100" />
     <arg name="right_ip" value="192.168.4.100" />
     <arg name="trig_rate" default="20"/>
-    <arg name="exposure" default="0.025"/>
+    <arg name="exposure" default="0.0007"/>
     <arg name="rate_sync_threshold" default="0.50" />
   </include>
 
@@ -19,7 +19,7 @@
     <arg name="left_ip" value="192.168.1.100" />
     <arg name="right_ip" value="192.168.2.100" />
     <arg name="trig_rate" default="20"/>
-    <arg name="exposure" default="0.001"/>
+    <arg name="exposure" default="0.0005"/>
     <arg name="rate_sync_threshold" default="0.50" />
   </include>
 

@@ -52,7 +52,7 @@
       </inertial>
     </xacro:static_transform>
     <!-- Cameras -->
-    <xacro:stereo_camera_pair parent="${robot_ns}/boom_top" prefix="${robot_ns}/upper_stereo" xyz="0 0 0.005" rpy="0 0 0" camera_base_length="0.3" camera_tilt="${12*M_PI/180}"/>
-    <xacro:stereo_camera_pair parent="${robot_ns}/boom_top" prefix="${robot_ns}/lower_stereo" xyz="0 0 -0.127" rpy="0 0 0" camera_base_length="0.11" camera_tilt="${34*M_PI/180}"/>
+    <xacro:stereo_camera_pair parent="${robot_ns}/boom_top" prefix="${robot_ns}/upper_stereo" xyz="0 0 0.005" rpy="0 0 0" camera_base_length="0.3" camera_tilt="${12*M_PI/180}" stereo_optical_frame_offset="0.2"/>
+    <xacro:stereo_camera_pair parent="${robot_ns}/boom_top" prefix="${robot_ns}/lower_stereo" xyz="0 0 -0.127" rpy="0 0 0" camera_base_length="0.11" camera_tilt="${34*M_PI/180}" stereo_optical_frame_offset="0.1"/>
   </xacro:macro>
 </robot>

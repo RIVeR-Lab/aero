@@ -4,6 +4,11 @@ iface lo inet loopback
 auto eth-back
 iface eth-back inet dhcp
 
+auto eth-back:1
+iface eth-back:1 inet static
+address 192.168.10.10
+netmask 255.255.255.0
+
 auto eth-cam-bl
 iface eth-cam-bl inet static
 address 192.168.1.2
