@@ -1,0 +1,1 @@
+rosrun camera_calibration cameracalibrator.py --size 7x6 --square 0.108 right:=/aero/upper_stereo/right/image_raw left:=/aero/upper_stereo/left/image_raw right_camera:=/aero/upper_stereo/right_camera/ left_camera:=/aero/upper_stereo/left_camera/ --approximate 0.01
