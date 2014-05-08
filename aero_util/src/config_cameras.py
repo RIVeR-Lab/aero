@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 import rospy
 import dynamic_reconfigure.client
+import readline
+
+def rlinput(prompt, prefill=''):
+   readline.set_startup_hook(lambda: readline.insert_text(prefill))
+   try:
+      return raw_input(prompt)
+   finally:
+      readline.set_startup_hook()
 
 def main():
     rospy.init_node('aero_config_cameras', anonymous=True)
@@ -38,15 +46,15 @@ def main():
     print '\twhitebalance:', upper_right_config['auto_whitebalance'], upper_right_config['whitebalance_red'], upper_right_config['whitebalance_blue']
 
     # Prompt for new parameters
-    lower_exposure = float(input('Lower exposure: '));
-    lower_gain = float(input('Lower gain: '));
-    lower_whitebalance_red = float(input('Lower whitebalance red: '));
-    lower_whitebalance_blue = float(input('Lower whitebalance blue: '));
+    lower_exposure = float(rlinput('Lower exposure: ', prefill=str(lower_left_config['exposure'])));
+    lower_gain = float(rlinput('Lower gain: ', prefill=str(lower_left_config['gain'])));
+    lower_whitebalance_red = float(rlinput('Lower whitebalance red: ', prefill=str(lower_left_config['whitebalance_red'])));
+    lower_whitebalance_blue = float(rlinput('Lower whitebalance blue: ', prefill=str(lower_left_config['whitebalance_blue'])));
 
-    upper_exposure = float(input('Upper exposure: '));
-    upper_gain = float(input('Upper gain: '));
-    upper_whitebalance_red = float(input('Upper whitebalance red: '));
-    upper_whitebalance_blue = float(input('Upper whitebalance blue: '));
+    upper_exposure = float(rlinput('Upper exposure: ', prefill=str(upper_left_config['exposure'])));
+    upper_gain = float(rlinput('Upper gain: ', prefill=str(upper_left_config['gain'])));
+    upper_whitebalance_red = float(rlinput('Upper whitebalance red: ', prefill=str(upper_left_config['whitebalance_red'])));
+    upper_whitebalance_blue = float(rlinput('Upper whitebalance blue: ', prefill=str(upper_left_config['whitebalance_blue'])));
     
     # Set new parameters
     lower_params = { 'auto_exposure': False, 'exposure' : lower_exposure,
