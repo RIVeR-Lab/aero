@@ -72,7 +72,7 @@
   </xacro:static_transform>
 
   <!-- Arm Base -->
-  <xacro:static_transform parent="aero/base_link" name="aero/arm_mount" xyz="0.3429 0 -0.023588" rpy="0 0 0">
+  <xacro:static_transform parent="aero/base_link" name="aero/arm_mount" xyz="0.3429 0 -0.0426" rpy="0 0 0">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
