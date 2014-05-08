@@ -7,7 +7,6 @@
   <arg name="right_ip" default="192.168.4.100"/>
 
   <arg name="trig_rate" default="30"/>
-  <arg name="rate_sync_threshold" default="0.50" />
 
   <arg name="auto_exposure" default="false" />
   <arg name="exposure" default="0.001" />
@@ -16,7 +15,7 @@
 
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="left_camera"
 	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)" respawn="true">
-    <remap from="camera" to="unsynced/left"/>
+    <remap from="camera" to="left"/>
 
     <param name="ip_address" value="$(arg left_ip)"/>
     <param name="trigger_mode" value="fixedrate" />
@@ -30,7 +29,7 @@
 
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="right_camera"
 	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)" respawn="true">
-    <remap from="camera" to="unsynced/right"/>
+    <remap from="camera" to="right"/>
 
     <param name="ip_address" value="$(arg right_ip)"/>
     <param name="trigger_mode" value="syncin2" />
@@ -42,21 +41,19 @@
     <param name="gain" value="$(arg gain)" />
   </node>
 
-  <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="camera_sync"
-	args="load stereo_image_sync/StereoImageSyncNodelet $(arg nodelet_manager)" respawn="true">
-    <param name="left_in" value="unsynced/left/image_raw" />
-    <param name="right_in" value="unsynced/right/image_raw" />
-
-    <param name="left_out" value="left/image_raw" />
-    <param name="right_out" value="right/image_raw" />
-
-    <param name="camera_rate" value="$(arg trig_rate)" />
-    <param name="camera_rate_threshold" value="$(arg rate_sync_threshold)" />
-  </node>
-
-  <include file="$(find stereo_image_proc)/launch/stereo_image_proc.launch" ns="$(arg ns)">
+  <include file="$(find image_proc)/launch/image_proc.launch"
+           ns="$(arg ns)/left">
+    <arg name="manager" value="$(arg nodelet_manager)" />
+  </include>
+  <include file="$(find image_proc)/launch/image_proc.launch"
+           ns="$(arg ns)/right">
     <arg name="manager" value="$(arg nodelet_manager)" />
   </include>
 
+  <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="disparity"
+        args="load stereo_image_proc/disparity $(arg nodelet_manager)">
+    <param name="approximate_sync" value="true"/>
+    <param name="disparity_range" type="int" value="128"/>
+  </node>
 
 </launch>
