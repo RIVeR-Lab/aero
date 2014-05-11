@@ -16,8 +16,13 @@
 
   <!-- We do not have a robot connected, so publish fake joint states -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="/use_gui" value="false"/> 
+    <param name="/use_gui" value="true"/> 
     <rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam>
+    <rosparam param="zeros">
+      jaco_joint_1: 2.4708
+      jaco_joint_2: 2.0826
+      jaco_joint_3: 0.4236
+    </rosparam>
   </node>
   
   <!-- Given the published joint states, publish tf for the robot links -->
