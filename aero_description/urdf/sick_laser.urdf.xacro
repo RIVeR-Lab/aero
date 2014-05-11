@@ -23,12 +23,14 @@
           <mesh filename="package://aero_description/meshes/LMS151.STL"/>
         </geometry>
       </visual>
+      <!--
       <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
         <mesh filename="package://aero_description/meshes/LMS151.STL"/>
       </geometry>             
     </collision>
+    -->
     </link>
     <!-- gazebo extensions -->
     <xacro:sick_laser_gazebo_v0 name="${name}" ros_topic="${ros_topic}" update_rate="${update_rate}" />
