@@ -1,14 +1,14 @@
 <launch>
-  <node name="robot_hw" pkg="aero_hw" type="aero_base_hw_node" ns="/aero" output="screen">
+  <node name="robot_hw" pkg="aero_hw" type="aero_base_hw_node" output="screen">
     <param name="controller_rate" value="30.0" />
   </node>
 
-  <node pkg="aero_hw" type="aero_arduino_controller_node" ns="/aero" name="arduino_controller_node" output="screen">
+  <node pkg="aero_hw" type="aero_arduino_controller_node" name="arduino_controller_node" output="screen">
   </node>
 
-  <node pkg="rosserial_python" type="serial_node.py" ns="/aero" name="arduino_rosserial" output="screen" args="/dev/ARDUINO"/>
+  <node pkg="rosserial_python" type="serial_node.py" name="arduino_rosserial" output="screen" args="/dev/ARDUINO"/>
 
-  <node pkg="kvh_driver" type="kvh_driver_node" ns="/aero" name="imu_node">
+  <node pkg="kvh_driver" type="kvh_driver_node" name="imu_node">
     <param name="device_id" value="kvh-1750" />
     <param name="device_address" value="/dev/IMU" />
     <param name="imu_topic" value="imu/data" />
@@ -18,17 +18,15 @@
     <remap from="is_calibrated" to="imu/is_calibrated"/>
   </node>
 
-  <node pkg="lms1xx" type="LMS1xx_node" name="LMS100" output="screen" ns="/aero">
+  <node pkg="lms1xx" type="LMS1xx_node" name="LMS100" output="screen">
     <param name="host" value="192.168.0.1"/>
     <param name="frame_id" value="aero/laser_link"/>
     <remap from="scan" to="laser_unfiltered"/>
   </node>
 
-  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" ns="/aero">
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter">
     <rosparam command="load" file="$(find aero_hw)/config/laserscan_filter.yaml"/>
     <remap from="scan" to="laser_unfiltered"/>
     <remap from="scan_filtered" to="laser"/>
   </node>
-
-  <include file="$(find aero_hw)/launch/arm.launch"/>
 </launch>

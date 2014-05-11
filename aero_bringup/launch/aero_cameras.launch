@@ -1,9 +1,9 @@
 <launch>
-  <node pkg="nodelet" type="nodelet" ns="/aero" name="vision_nodelet_manager" output="screen"  args="manager" respawn="true"/>
+  <node pkg="nodelet" type="nodelet" name="vision_nodelet_manager" output="screen"  args="manager" respawn="true"/>
 
   <include file="$(find aero_bringup)/launch/aero_camera_pair.launch">
-    <arg name="nodelet_manager" value="/aero/vision_nodelet_manager" />
-    <arg name="ns" value="/aero/upper_stereo" />
+    <arg name="nodelet_manager" value="/vision_nodelet_manager" />
+    <arg name="ns" value="upper_stereo" />
     <arg name="tf_prefix" value="aero/upper_stereo" />
     <arg name="left_ip" value="192.168.3.100" />
     <arg name="right_ip" value="192.168.4.100" />
@@ -12,8 +12,8 @@
   </include>
 
   <include file="$(find aero_bringup)/launch/aero_camera_pair.launch">
-    <arg name="nodelet_manager" value="/aero/vision_nodelet_manager" />
-    <arg name="ns" value="/aero/lower_stereo" />
+    <arg name="nodelet_manager" value="/vision_nodelet_manager" />
+    <arg name="ns" value="lower_stereo" />
     <arg name="tf_prefix" value="aero/lower_stereo" />
     <arg name="left_ip" value="192.168.1.100" />
     <arg name="right_ip" value="192.168.2.100" />
@@ -22,7 +22,7 @@
   </include>
 
 
-  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer" ns="/aero">
+  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer">
     <remap from="stereo" to="upper_stereo"/>
     <remap from="image" to="/image_rect"/>
     <param name="odom_frame_id" value="aero/odom"/>
