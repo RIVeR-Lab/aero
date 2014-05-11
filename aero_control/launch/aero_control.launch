@@ -1,14 +1,14 @@
 <launch>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find aero_control)/config/aero_control.yaml" command="load"/>
+  <rosparam file="$(find aero_control)/config/aero_control.yaml" command="load" ns="/aero"/>
 
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" args="left_drive_controller right_drive_controller joint_state_controller boom_controller safety_topic_controller"/>
+    output="screen" ns="/aero" args="left_drive_controller right_drive_controller joint_state_controller boom_controller safety_topic_controller"/>
 
   <node name="drive_controller" pkg="robot_drive_controllers" type="skid_4wheel_drive_controller_node"
-    output="screen">
+    output="screen" ns="/aero">
     <remap from="left_drive" to="left_drive_controller/command" />
     <remap from="right_drive" to="right_drive_controller/command" />
   </node>
@@ -17,6 +17,7 @@
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
+    <remap from="/joint_states" to="/aero/joint_states" />
   </node>
 
 </launch>
