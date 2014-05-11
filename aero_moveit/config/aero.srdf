@@ -125,8 +125,6 @@
     <disable_collisions link1="aero/base_footprint" link2="jaco_link_1" reason="Never" />
     <disable_collisions link1="aero/base_footprint" link2="jaco_link_2" reason="Never" />
     <disable_collisions link1="aero/base_footprint" link2="jaco_link_base" reason="Never" />
-    <disable_collisions link1="aero/base_footprint" link2="jaco_link_finger_2" reason="Never" />
-    <disable_collisions link1="aero/base_footprint" link2="jaco_link_finger_3" reason="Never" />
     <disable_collisions link1="aero/base_footprint_front_bumper_part" link2="aero/base_footprint_rear_bumper_part" reason="Never" />
     <disable_collisions link1="aero/base_footprint_front_bumper_part" link2="aero/base_footprint_top_plate_part" reason="Never" />
     <disable_collisions link1="aero/base_footprint_front_bumper_part" link2="aero/base_footprint_user_rail_part" reason="Never" />
