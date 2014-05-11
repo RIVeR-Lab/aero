@@ -75,10 +75,11 @@
 	</visual>
 	
 	<collision>
-	  <origin xyz="0 0 ${wheel_x_size/2 - base_z_origin_to_wheel_origin - 0.02}" rpy="0 0 0 " />
+	  <origin xyz="0 0 0" rpy="0 0 0" />
 	  <geometry>
-	    <box size = "${base_x_size+0.02} ${base_y_size} ${base_z_size + 0.02}"/> <!--making it slightly bigger in x and z direction-->
+	    <mesh filename="package://aero_description/meshes/base_collision.STL" />
 	  </geometry>
+	  <material name="Black" />
 	</collision>     
       </link>
       <gazebo reference="${robot_ns}/base_link">
@@ -87,10 +88,10 @@
       </gazebo>
 
       <!-- WHEEL macros -->
-      <husky_wheel fb="back" lr="left" parent="${robot_ns}/base_link" translateX="-1" translateY="1" flipY="-1" robot_ns="${robot_ns}"/>
-      <husky_wheel fb="back" lr="right" parent="${robot_ns}/base_link" translateX="-1" translateY="-1" flipY="-1" robot_ns="${robot_ns}"/>
-      <husky_wheel fb="front" lr="left" parent="${robot_ns}/base_link" translateX="1" translateY="1" flipY="-1" robot_ns="${robot_ns}"/>
-      <husky_wheel fb="front" lr="right" parent="${robot_ns}/base_link" translateX="1" translateY="-1" flipY="-1" robot_ns="${robot_ns}"/>
+      <husky_wheel fb="back" lr="left" parent="${robot_ns}/base_link" translateX="-1" translateY="1" flipY="-1" robot_ns="${robot_ns}" mimic="true"/>
+      <husky_wheel fb="back" lr="right" parent="${robot_ns}/base_link" translateX="-1" translateY="-1" flipY="-1" robot_ns="${robot_ns}" mimic="true"/>
+      <husky_wheel fb="front" lr="left" parent="${robot_ns}/base_link" translateX="1" translateY="1" flipY="-1" robot_ns="${robot_ns}" mimic="false"/>
+      <husky_wheel fb="front" lr="right" parent="${robot_ns}/base_link" translateX="1" translateY="-1" flipY="-1" robot_ns="${robot_ns}" mimic="false"/>
 
       <!-- DECORATIONS -->
       <!-- Top Plate -->

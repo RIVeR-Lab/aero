@@ -27,7 +27,7 @@
 	<property name="base_z_origin_to_wheel_origin" value="0.03282508" />
 
 
-	<xacro:macro name="husky_wheel" params="fb lr parent translateX translateY flipY robot_ns"> <!--fb : front, back ; lr: left, right -->
+	<xacro:macro name="husky_wheel" params="fb lr parent translateX translateY flipY robot_ns mimic"> <!--fb : front, back ; lr: left, right -->
 		<link name="${robot_ns}/${fb}_${lr}_wheel">
 			<inertial>
 				<mass value="${wheel_mass}" />
@@ -67,7 +67,9 @@
 			<axis xyz="0 1 0" rpy="0 0 0" />
 			<limit effort="100" velocity="100"/>
 			<joint_properties damping="0.0" friction="0.0"/>
-			<mimic joint="${robot_ns}/joint_front_${lr}_wheel" multiplier="1.0" offset="0.0" />
+			<xacro:if value="${mimic}">
+				<mimic joint="${robot_ns}/joint_front_${lr}_wheel" multiplier="1.0" offset="0.0" />
+			</xacro:if>
 		</joint>
 
 		<transmission name="${robot_ns}/${fb}_${lr}_wheel_tran">
