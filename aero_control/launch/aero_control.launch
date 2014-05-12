@@ -11,13 +11,13 @@
     output="screen" ns="/aero">
     <remap from="left_drive" to="left_drive_controller/command" />
     <remap from="right_drive" to="right_drive_controller/command" />
+    <remap from="joint_states" to="/joint_states"/>
   </node>
 
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">
-    <remap from="/joint_states" to="/aero/joint_states" />
   </node>
 
 </launch>
