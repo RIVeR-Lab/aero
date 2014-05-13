@@ -12,12 +12,14 @@ find_package(catkin REQUIRED COMPONENTS
   roboteq_driver
   safety_interface
   rosserial_arduino
+  filters
+  pluginlib
 )
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES 
-  CATKIN_DEPENDS control_toolbox controller_manager hardware_interface roscpp river_ros_util transmission_interface device_driver_base roboteq_driver safety_interface rosserial_arduino rosserial_python
+  CATKIN_DEPENDS control_toolbox controller_manager hardware_interface roscpp river_ros_util transmission_interface device_driver_base roboteq_driver safety_interface rosserial_arduino rosserial_python filters pluginlib
   DEPENDS 
 )
 
@@ -26,6 +28,12 @@ include_directories(
   include
 )
 
+
+add_library(laser_shutter_filter
+	src/laser_shutter_filter.cpp)
+target_link_libraries(laser_shutter_filter
+  ${catkin_LIBRARIES}
+)
 
 add_executable(aero_base_hw_node
 	src/aero_base_hw_node.cpp)
