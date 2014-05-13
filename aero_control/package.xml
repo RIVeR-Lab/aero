@@ -11,6 +11,9 @@
 
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>filters</build_depend>
+  <build_depend>sensor_msgs</build_depend>
   <run_depend>ros_control</run_depend>
   <run_depend>ros_controllers</run_depend>
   <run_depend>controller_manager</run_depend>
@@ -18,7 +21,11 @@
   <run_depend>robot_drive_controllers</run_depend>
   <run_depend>joint_state_controller</run_depend>
   <run_depend>safety_controller</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>filters</run_depend>
+  <run_depend>sensor_msgs</run_depend>
 
   <export>
+    <filters plugin="${prefix}/laser_filter_plugins.xml"/>
   </export>
 </package>

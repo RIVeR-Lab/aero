@@ -39,6 +39,5 @@
 
 
   <export>
-    <filters plugin="${prefix}/laser_filter_plugins.xml"/>
   </export>
 </package>

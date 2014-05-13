@@ -29,12 +29,6 @@ include_directories(
 )
 
 
-add_library(laser_shutter_filter
-	src/laser_shutter_filter.cpp)
-target_link_libraries(laser_shutter_filter
-  ${catkin_LIBRARIES}
-)
-
 add_executable(aero_base_hw_node
 	src/aero_base_hw_node.cpp)
 target_link_libraries(aero_base_hw_node

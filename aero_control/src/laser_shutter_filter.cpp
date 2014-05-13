@@ -1,8 +1,8 @@
-#include <aero_hw/laser_shutter_filter.h>
+#include <aero_control/laser_shutter_filter.h>
 #include <pluginlib/class_list_macros.h>
 #include <boost/foreach.hpp>
 
-namespace aero_hw{
+namespace aero_control{
 
   LaserShutterFilter::LaserShutterFilter():shutter_enabled_(false){
   }
@@ -34,4 +34,4 @@ namespace aero_hw{
 
 }
 
-PLUGINLIB_DECLARE_CLASS(aero_hw, LaserShutterFilter, aero_hw::LaserShutterFilter, filters::FilterBase<sensor_msgs::LaserScan>)
+PLUGINLIB_DECLARE_CLASS(aero_control, LaserShutterFilter, aero_control::LaserShutterFilter, filters::FilterBase<sensor_msgs::LaserScan>)

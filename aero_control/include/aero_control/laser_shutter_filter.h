@@ -10,7 +10,7 @@
 
 #include <filters/filter_chain.h>
 
-namespace aero_hw{
+namespace aero_control{
 
   class LaserShutterFilter : public filters::FilterBase<sensor_msgs::LaserScan> 
     {
