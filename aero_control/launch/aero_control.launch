@@ -13,6 +13,11 @@
     <remap from="right_drive" to="right_drive_controller/command" />
   </node>
 
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" ns="/aero">
+    <rosparam command="load" file="$(find aero_control)/config/laserscan_filter.yaml"/>
+    <remap from="scan" to="laser_unfiltered"/>
+    <remap from="scan_filtered" to="laser"/>
+  </node>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

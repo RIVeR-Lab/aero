@@ -24,11 +24,6 @@
     <remap from="scan" to="laser_unfiltered"/>
   </node>
 
-  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" ns="/aero">
-    <rosparam command="load" file="$(find aero_hw)/config/laserscan_filter.yaml"/>
-    <remap from="scan" to="laser_unfiltered"/>
-    <remap from="scan_filtered" to="laser"/>
-  </node>
 
   <include file="$(find aero_hw)/launch/arm.launch"/>
 </launch>
