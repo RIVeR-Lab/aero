@@ -19,5 +19,9 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen" ns="/aero">
   </node>
+  
+
+  <include file="$(find aero_moveit)/launch/move_group.launch" ns="/aero">
+  </include>
 
 </launch>
