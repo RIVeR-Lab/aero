@@ -56,6 +56,9 @@ public:
       jnt_vel_interface.registerHandle(hardware_interface::JointHandle(jnt_state_interface.getHandle(drive_names[i]), &drive_joint_data[i].cmd));
     }
 
+    jnt_state_interface.registerHandle(drive_joint_data[0].state_handle(robot_ns+"joint_back_left_wheel"));
+    jnt_state_interface.registerHandle(drive_joint_data[1].state_handle(robot_ns+"joint_back_right_wheel"));
+
     jnt_state_interface.registerHandle(boom_joint_data.state_handle(boom_name));
     jnt_pos_interface.registerHandle(hardware_interface::JointHandle(jnt_state_interface.getHandle(boom_name), &boom_joint_data.cmd));
 
