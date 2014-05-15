@@ -21,7 +21,7 @@
   </node>
   
 
-  <include file="$(find aero_moveit)/launch/move_group.launch" ns="/aero">
+  <include file="$(find aero_moveit)/launch/move_group.launch">
   </include>
 
 </launch>

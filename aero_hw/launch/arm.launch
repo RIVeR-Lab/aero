@@ -1,6 +1,7 @@
 <launch>
   <group ns="aero">
     <group ns="jaco">
+      <include file="$(find jaco_ros)/launch/arm.launch"/>
     </group>
   </group>
 </launch>

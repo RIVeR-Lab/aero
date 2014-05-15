@@ -1,6 +1,6 @@
 controller_list:
   - name: arm_controller
-    action_ns: follow_joint_trajectory
+    action_ns: trajectory
     type: FollowJointTrajectory
     default: true
     joints:
@@ -11,7 +11,7 @@ controller_list:
       - jaco_joint_5
       - jaco_joint_6
   - name: fingers_controller
-    action_ns: gripper_cmd
+    action_ns: gripper
     type: GripperCommand
     default: true
     joints:
