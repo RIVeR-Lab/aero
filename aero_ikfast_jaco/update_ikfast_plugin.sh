@@ -1,0 +1,1 @@
+rosrun moveit_ikfast create_ikfast_moveit_plugin.py aero jaco aero_ikfast_jaco /home/vdimitrov/srr/src/aero/aero_ikfast_jaco/src/aero_jaco_ikfast_solver.cpp

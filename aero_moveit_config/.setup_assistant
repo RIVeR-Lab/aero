@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: aero_description
+    relative_path: robots/aero_base.urdf.xacro
+  SRDF:
+    relative_path: config/aero.srdf
+  CONFIG:
+    generated_timestamp: 1400209248
