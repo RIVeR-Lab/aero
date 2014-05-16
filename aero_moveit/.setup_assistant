@@ -5,4 +5,4 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/aero.srdf
   CONFIG:
-    generated_timestamp: 1399821337
+    generated_timestamp: 1400198862
