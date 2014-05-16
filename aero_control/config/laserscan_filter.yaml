@@ -6,9 +6,9 @@ scan_filter_chain:
     upper_angle: 1.61
 - name: laser_shutter
   type: aero_control/LaserShutterFilter
-- name: small_object_filter
-  type: aero_control/LaserSmallObjectFilter
-  params:
-    max_object_size: 5
-    min_surrounding: 5
-    max_depth_variance: 0.1
+#- name: small_object_filter
+#  type: aero_control/LaserSmallObjectFilter
+#  params:
+#    max_object_size: 5
+#    min_surrounding: 5
+#    max_depth_variance: 0.1

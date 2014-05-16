@@ -39,6 +39,7 @@ namespace aero_control{
       if(variance(left_acc) > max_depth_variance_)
       	continue;
       for(int size = max_object_size_; size>0; --size){//start with the largest size
+
         accumulator_set<double, stats<tag::mean, tag::variance(lazy)> > obj_acc;
         for(int j = 0; j<size; ++j)
 	  obj_acc(scan_out.ranges[i+min_surrounding_+j]);
@@ -51,6 +52,15 @@ namespace aero_control{
         for(int j = 0; j<min_surrounding_; ++j)//add right
 	  surrounding_acc(scan_out.ranges[i+min_surrounding_+size+j]);
         if(variance(surrounding_acc) > max_depth_variance_)
+	  continue;
+
+        accumulator_set<double, stats<tag::mean, tag::variance(lazy)> > all_acc;
+        for(int j = 0; j<min_surrounding_*2+size; ++j)//add all
+	  all_acc(scan_out.ranges[i+j]);
+        if(variance(surrounding_acc) < max_depth_variance_)//all the points have the same value
+	  continue;
+
+	if(mean(surrounding_acc) < mean(obj_acc))//small area is behind the surrounding
 	  continue;
 
 	//all variances are within tolerance
