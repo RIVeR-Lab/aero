@@ -25,9 +25,9 @@
     <arg name="decimate" value="false"/>
   </include>
 
-  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer" ns="/aero">
-    <remap from="stereo" to="upper_stereo"/>
-    <remap from="image" to="/image_rect_dec"/>
+  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer" ns="/aero/upper_stereo">
+    <remap from="stereo" to="dec"/>
+    <remap from="image" to="/image_rect"/>
     <param name="odom_frame_id" value="aero/odom"/>
     <param name="base_link_frame_id" value="aero/base_footprint"/>
     <param name="publish_tf" value="false"/>
@@ -38,7 +38,8 @@
     <param name="match_disp_tolerance" value="2" />
     <param name="ransac_iters" value="200" />
     <param name="refinement" value="1" />
-    <param name="queue_size" value="0" />
+    <param name="queue_size" value="5" />
+    <param name="approximate_sync" value="true" />
     <param name="match_binsize" value="50" />
     <param name="ref_frame_change_method" value="0" />
     <param name="ref_frame_motion_threshold" value="5" />

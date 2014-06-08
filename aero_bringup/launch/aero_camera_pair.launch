@@ -13,6 +13,9 @@
   <arg name="auto_gain" default="false" />
   <arg name="gain" default="0" />
 
+  <arg name="stereo_image_proc" />
+  <arg name="decimate" />
+
   <node pkg="nodelet" type="nodelet" ns="$(arg ns)" name="left_camera"
 	args="load prosilica/ProsilicaNodelet $(arg nodelet_manager)" respawn="true">
     <remap from="camera" to="left"/>
@@ -58,31 +61,31 @@
   </node>
 </group>
 
-<group if="$(arg decimate)'>
-  <node pkg="nodelet" type="nodelet" args="standalone image_proc/crop_decimate" name="left_decimator">
+<group if="$(arg decimate)">
+  <node pkg="nodelet" type="nodelet" args="load image_proc/crop_decimate $(arg nodelet_manager)" ns="$(arg ns)" name="left_decimator">
     <param name="decimation_x" type="int" value="2" />
     <param name="decimation_y" type="int" value="2" />
 
     <!-- remap input topics -->
-    <remap from="camera/image_raw" to="$(arg ns)/left/image_rect"/>
-    <remap from="camera/image_info" to="$(arg ns)/left/camera_info"/>
+    <remap from="camera/image_raw" to="left/image_rect"/>
+    <remap from="camera/camera_info" to="left/camera_info"/>
 
     <!-- remap output topics -->
-    <remap from="camera_out/image_raw" to="$(arg ns)/left/image_rect_dec"/>
-    <remap from="camera_out/image_info" to="$(arg ns)/left/camera_info_dec"/>
+    <remap from="camera_out/image_raw" to="dec/left/image_rect"/>
+    <remap from="camera_out/camera_info" to="dec/left/camera_info"/>
   </node>
 
-  <node pkg="nodelet" type="nodelet" args="standalone image_proc/crop_decimate" name="right_decimator">
+  <node pkg="nodelet" type="nodelet" args="load image_proc/crop_decimate $(arg nodelet_manager)" ns="$(arg ns)" name="right_decimator">
     <param name="decimation_x" type="int" value="2" />
     <param name="decimation_y" type="int" value="2" />
 
     <!-- remap input topics -->
-    <remap from="camera/image_raw" to="$(arg ns)/right/image_rect"/>
-    <remap from="camera/image_info" to="$(arg ns)/right/camera_info"/>
+    <remap from="camera/image_raw" to="right/image_rect"/>
+    <remap from="camera/camera_info" to="right/camera_info"/>
 
     <!-- remap output topics -->
-    <remap from="camera_out/image_raw" to="$(arg ns)/right/image_rect_dec"/>
-    <remap from="camera_out/image_info" to="$(arg ns)/right/camera_info_dec"/>
+    <remap from="camera_out/image_raw" to="dec/right/image_rect"/>
+    <remap from="camera_out/camera_info" to="dec/right/camera_info"/>
   </node>
 </group>
 
