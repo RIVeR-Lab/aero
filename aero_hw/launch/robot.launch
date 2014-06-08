@@ -33,7 +33,7 @@
     <!--<param name="pause_topic" value="$(arg pause_topic)" />-->
   </node>
   <node pkg="aero_hw" type="init_camera_boom.py" ns="/aero" name="init_camera_boom" output="screen">
-    <param name="target_position" value="48193" />
+    <param name="target_position" value="58193" />
   </node>
 
   <include file="$(find aero_hw)/launch/arm.launch"/>
