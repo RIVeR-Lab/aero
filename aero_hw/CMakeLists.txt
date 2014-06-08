@@ -14,12 +14,13 @@ find_package(catkin REQUIRED COMPONENTS
   rosserial_arduino
   filters
   pluginlib
+  hd_driver
 )
 
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES 
-  CATKIN_DEPENDS control_toolbox controller_manager hardware_interface roscpp river_ros_util transmission_interface device_driver_base roboteq_driver safety_interface rosserial_arduino rosserial_python filters pluginlib
+  CATKIN_DEPENDS control_toolbox controller_manager hardware_interface roscpp river_ros_util transmission_interface device_driver_base roboteq_driver safety_interface rosserial_arduino rosserial_python filters pluginlib hd_driver
   DEPENDS 
 )
 

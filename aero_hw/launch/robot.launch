@@ -24,6 +24,17 @@
     <remap from="scan" to="laser_unfiltered"/>
   </node>
 
+  <node pkg="hd_driver" type="hd_manager" ns="/aero" name="camera_boom_hd_manager" output="screen">
+    <param name="feedback_rate" value="5" />
+    <param name="reference_frame" value="aero/boom_base" />
+    <param name="port" value="/dev/BOOM" />
+    <param name="control_service" value="hd_camera_boom_control" />
+    <param name="info_topic" value="hd_camera_boom_feedback" />
+    <!--<param name="pause_topic" value="$(arg pause_topic)" />-->
+  </node>
+  <node pkg="aero_hw" type="init_camera_boom.py" ns="/aero" name="init_camera_boom" output="screen">
+    <param name="target_position" value="48193" />
+  </node>
 
   <include file="$(find aero_hw)/launch/arm.launch"/>
 </launch>

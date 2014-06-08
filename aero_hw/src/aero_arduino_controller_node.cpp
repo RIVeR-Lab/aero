@@ -24,19 +24,21 @@ void pauseCallback(const std_msgs::BoolConstPtr& is_paused){
     safety_interface::SoftwareStop msg;
     msg.stop = is_paused->data;
     msg.header.stamp = ros::Time::now();
-    time_of_toggle = msg.header.stamp.toSec();
 	    
-    if(msg.stop)
+    if(msg.stop){
       msg.message = "Hardware pause was pressed";
-    
-    else
+      time_of_toggle = msg.header.stamp.toSec();
+    }
+    else{
       msg.message = "Hardware pause was released";
-  		if(ros::Time::now().toSec() - time_of_toggle < 5 && !is_first_time){
-  			msg.message = "Hardware pause is released, but delay is in effect";
-  			msg.stop = true;
-  		}
-  		else
-  			msg.message = "Hardware pause was pressed";	
+      if(ros::Time::now().toSec() - time_of_toggle < 5 && !is_first_time){
+	msg.message = "Hardware pause is released, but delay is in effect";
+	msg.stop = true;
+      }
+      else{
+	msg.message = "Hardware pause was pressed";
+      }
+    }
 
     last_pause_state = msg.stop;
     is_first_time = false;
