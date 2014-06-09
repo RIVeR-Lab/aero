@@ -63,8 +63,8 @@
 
 <group if="$(arg decimate)">
   <node pkg="nodelet" type="nodelet" args="load image_proc/crop_decimate $(arg nodelet_manager)" ns="$(arg ns)" name="left_decimator">
-    <param name="decimation_x" type="int" value="2" />
-    <param name="decimation_y" type="int" value="2" />
+    <param name="decimation_x" type="int" value="4" />
+    <param name="decimation_y" type="int" value="4" />
 
     <!-- remap input topics -->
     <remap from="camera/image_raw" to="left/image_rect"/>
@@ -76,8 +76,8 @@
   </node>
 
   <node pkg="nodelet" type="nodelet" args="load image_proc/crop_decimate $(arg nodelet_manager)" ns="$(arg ns)" name="right_decimator">
-    <param name="decimation_x" type="int" value="2" />
-    <param name="decimation_y" type="int" value="2" />
+    <param name="decimation_x" type="int" value="4" />
+    <param name="decimation_y" type="int" value="4" />
 
     <!-- remap input topics -->
     <remap from="camera/image_raw" to="right/image_rect"/>

@@ -8,7 +8,7 @@
     <arg name="left_ip" value="192.168.3.100" />
     <arg name="right_ip" value="192.168.4.100" />
     <arg name="trig_rate" default="20"/>
-    <arg name="exposure" default="0.0007"/>
+    <arg name="exposure" default="0.003"/>
     <arg name="stereo_image_proc" value="false"/>
     <arg name="decimate" value="true"/>
   </include>
@@ -20,12 +20,12 @@
     <arg name="left_ip" value="192.168.1.100" />
     <arg name="right_ip" value="192.168.2.100" />
     <arg name="trig_rate" default="20"/>
-    <arg name="exposure" default="0.0005"/>
+    <arg name="exposure" default="0.002"/>
     <arg name="stereo_image_proc" value="true"/>
     <arg name="decimate" value="false"/>
   </include>
 
-  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer" ns="/aero/upper_stereo">
+<!--  <node pkg="viso2_ros" type="stereo_odometer" name="stereo_odometer" ns="/aero/upper_stereo">
     <remap from="stereo" to="dec"/>
     <remap from="image" to="/image_rect"/>
     <param name="odom_frame_id" value="aero/odom"/>
@@ -33,8 +33,8 @@
     <param name="publish_tf" value="false"/>
 
     <param name="max_features" value="5" />
-    <param name="bucket_width" value="646" />
-    <param name="bucket_height" value="100" />
+    <param name="bucket_width" value="323" />
+    <param name="bucket_height" value="50" />
     <param name="match_disp_tolerance" value="2" />
     <param name="ransac_iters" value="200" />
     <param name="refinement" value="1" />
@@ -44,6 +44,6 @@
     <param name="ref_frame_change_method" value="0" />
     <param name="ref_frame_motion_threshold" value="5" />
     <param name="match_radius" value="100" />
-  </node>
+  </node>-->
 
 </launch>
