@@ -1,7 +1,8 @@
 #include <ros/ros.h>
 #include <std_msgs/Bool.h>
 #include <safety_interface/SoftwareStop.h>
-
+#include <jaco_msgs/Stop.h>
+#include <jaco_msgs/Start.h>
 
 std::string stop_topic("stop");
 std::string arduino_pause_topic("arduino_pause");
@@ -28,6 +29,7 @@ void pauseCallback(const std_msgs::BoolConstPtr& is_paused){
     if(msg.stop){
       msg.message = "Hardware pause was pressed";
       time_of_toggle = msg.header.stamp.toSec();
+
     }
     else{
       msg.message = "Hardware pause was released";
@@ -43,6 +45,15 @@ void pauseCallback(const std_msgs::BoolConstPtr& is_paused){
     last_pause_state = msg.stop;
     is_first_time = false;
     pause_pub.publish(msg);
+
+    if(msg.stop){
+      jaco_msgs::Stop stop_msg;
+      ros::service::call("/aero/jaco/stop", stop_msg);
+    }
+    else{
+      jaco_msgs::Start start_msg;
+      ros::service::call("/aero/jaco/start", start_msg);
+    }
   }
 }
 
