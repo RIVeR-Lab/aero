@@ -9,6 +9,7 @@
   <arg name="trig_rate" default="30"/>
 
   <arg name="auto_exposure" default="true" />
+  <arg name="exposure_auto_max" default="0.03" />
   <arg name="exposure" default="0.001" />
   <arg name="auto_gain" default="false" />
   <arg name="gain" default="0" />
@@ -26,6 +27,7 @@
     <param name="frame_id" value="$(arg tf_prefix)/optical_frame" />
     <param name="auto_exposure" value="$(arg auto_exposure)" />
     <param name="exposure" value="$(arg exposure)" />
+    <param name="exposure_auto_max" value="$(arg exposure_auto_max)" />
     <param name="auto_gain" value="$(arg auto_gain)" />
     <param name="gain" value="$(arg gain)" />
   </node>
@@ -40,6 +42,7 @@
     <param name="frame_id" value="$(arg tf_prefix)/optical_frame" />
     <param name="auto_exposure" value="$(arg auto_exposure)" />
     <param name="exposure" value="$(arg exposure)" />
+    <param name="exposure_auto_max" value="$(arg exposure_auto_max)" />
     <param name="auto_gain" value="$(arg auto_gain)" />
     <param name="gain" value="$(arg gain)" />
   </node>

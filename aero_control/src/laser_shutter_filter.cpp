@@ -23,7 +23,7 @@ namespace aero_control{
     if(shutter_enabled_){
       scan_out = scan_in;
       for(int i = 0; i<scan_out.ranges.size(); ++i){
-        scan_out.ranges[i] = INFINITY;
+        scan_out.ranges[i] = scan_in.range_max - 1;
       }
     }
     else{
